@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  <title>Canal Network | Hubworld: Aidalon | Decksmith</title>
+
+  <meta name="description" content="(Confront) Choose a player: Shift an unforged card in their grid.
+(Discover) If this card is in your grid, choose a player: Shift a card in their grid (forged or unforged).">
+
+  <meta property="og:site_name" content="Decksmith">
+  <meta property="og:title" content="Canal Network | Hubworld: Aidalon | Decksmith">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://decksmith.app/hubworldaidalon/cards/prime-collective/canal-network.og">
+  <meta property="og:url" content="https://decksmith.app/hubworldaidalon/cards/prime-collective/canal-network">
+  <meta property="og:description" content="(Confront) Choose a player: Shift an unforged card in their grid.
+(Discover) If this card is in your grid, choose a player: Shift a card in their grid (forged or unforged).">
+
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Decksmith" />
+  <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+
+  <script defer src="https://decksmith.app/dist/assets/alpine-CPvVi-4h.js" type="module"></script>  <link href="https://decksmith.app/dist/assets/alpine-ro8mQPXK.css" rel="stylesheet">
+  
+  <style>
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+
+<body
+  x-data="{
+    drawerOpen: $persist(window.matchMedia('(min-width: 1024px)').matches).as('drawerOpen'),
+    closeDrawer() {
+      if (window.matchMedia('(max-width: 1023px)').matches) { this.drawerOpen = false }
+    }
+  }"
+  x-cloak
+  class="bg-slate-100 font-sans"
+>
+  <nav
+  x-data
+  class="fixed inset-x-0 top-0 z-40 text-white"
+>
+  <div class="flex items-center p-1 gap-1 bg-green-900 shadow-[0px_4px_8px] shadow-green-950/50">
+    <button
+      type="button"
+      @click="drawerOpen = !drawerOpen"
+      class="p-2 rounded-full hover:bg-green-800 active:bg-green-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 -960 960 960"
+        role="img"
+        class="size-6 fill-white"
+      >
+        <path d="M160-240q-17 0-28.5-11.5T120-280q0-17 11.5-28.5T160-320h640q17 0 28.5 11.5T840-280q0 17-11.5 28.5T800-240H160Zm0-200q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h640q17 0 28.5 11.5T840-480q0 17-11.5 28.5T800-440H160Zm0-200q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h640q17 0 28.5 11.5T840-680q0 17-11.5 28.5T800-640H160Z"/>
+      </svg>
+    </button>
+
+    <div
+      class="text-xl font-[Charm] truncate"
+    >
+      Decksmith                                      – Hubworld: Aidalon                  </div>
+  </div>
+
+  
+</nav>
+  
+<nav
+  x-show="drawerOpen"
+  class="
+    flex flex-col
+    fixed top-12 bottom-0 w-64 z-40 lg:z-auto overflow-auto bg-green-900 text-white
+      "
+>
+      <a
+      href="https://decksmith.app"
+      @click="closeDrawer()"
+      class="
+        hover:bg-green-800 active:bg-green-700 transition-colors
+        focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+      "
+    >
+      <svg class="size-48 m-6 justify-self-center fill-white" viewBox="0 0 63 88" xmlns="http://www.w3.org/2000/svg">
+  <path d="M39.15776424 30.15396523c2.30385496-1.45243705 4.98332433-2.17864079 8.03843473-2.17864079 2.50417989 0 4.5576213.52587881 6.16029465 1.57763643 1.60267335 1.001669 2.40401742 2.45409126 2.40401742 4.35728158 0 1.4524193-.60100436 3.1302182-1.80301307 5.03340852-.45075326.75125545-.95159516 1.12688317-1.50251089 1.12688317-.40066464 0-.6761299-.1753028-.82638099-.52587881-.1001181-.40067943-.20033971-1.10184625-.30050217-2.10351525-.1502511-4.0067026-2.30385496-6.0100406-6.46079682-6.0100406-2.50418137 0-4.45744552.6510782-5.85979395 1.95326416-2.80312927 3.08338305-6.3591555 1.27797424.15025109-3.23039841z"/>
+  <path d="M16.48018697 54.0889903v.07512555c1.4524267.3505908 3.6310675.52587881 6.53592237.52587881 3.90652831 0 7.26213646-1.10184624 10.06682296-3.30552395 2.8046865-2.25376633 4.9332431-5.30887674 6.3856698-9.16531642 4.71243019-7.8913469 5.02911098-7.18018307 5.55929324 1.3522598-1.95326711 4.70787238-4.83307916 8.51422344-8.63943909 11.41908275-3.80636141 2.85477069-8.33893543 4.28215603-13.59772354 4.28215603-1.65276198 0-3.73123587-.20033971-6.2354202-.60100435-2.00334834-.30050218-3.43073368-.45075327-4.28215602-.45075327-1.68212158-2.58831162 1.81028456-2.92035765 4.20703048-4.13190494z"/>
+  <path d="M27.7485602 6.38452839c-4.45744404 0-8.38921631.87597568-11.79491752 2.62890455-3.35561258 1.75293184-5.80910343 4.18238103-7.3616985 7.2875697-.35058193.80133964-.52578121 1.37730708-.52578121 1.72789345 0 .4006676.20000697.60067457.60067605.60067457.15025109 0 .30063527-.0496154.45088636-.14978673.15024813-.15024961.35025807-.37582885.60067605-.67633102.30050218-.30050218.52607846-.5508906.67632955-.75122587 3.90653422-4.40736577 9.06544085-6.6112372 15.47614905-6.6112372 5.4090392 0 9.39044165 1.52790273 11.94471016 4.58300721 2.42716141 2.90307287 3.69889787 7.27886077 3.81955718 13.1216021 1.69010293-.6335982 3.54336877-.95298528 5.56119949-.95298528.2779793 0 .54931857.00739425.81619171.020556-.17848232-6.42565048-1.92186818-11.44321461-5.23870681-15.04436498-3.45577505-3.8564456-8.46429749-5.78435488-15.02527156-5.78435488zm-3.45578984 7.58790625c-1.15192008 0-2.45423914.62558875-3.9066762 1.87768017-1.40233363 1.2520929-2.20311574 2.504032-2.40345545 3.7561249l-4.95824157 29.52474565c-.30050218 1.75292444-.77646982 3.10485889-1.42754802 4.05645405-.6510915.90150653-1.50302405 1.72787273-2.55478167 2.47912818-.45075326.30048739-.87633504.80127013-1.27700411 1.50243694-.35058637.65109299-.52578121 1.20226012-.52578121 1.6529986 0 .30050218.12558388.45090115.37599448.45090115.25041946 0 .80081168-.17519928 1.65223846-.52579008.85141939-.3505908 1.85373464-.5257753 3.005671-.5257753.8514179 0 2.27855184.1496152 4.28190462.45011737 2.50417989.40066464 4.58248075.601448 6.23522794.601448 5.25878811 0 9.7913429-1.42713393 13.59770875-4.28190462.42851138-.32701795.8437131-.66730117 1.24874035-1.01718213l-2.98731995-3.53526319c-.06935803-.09109712-.12969508-.18368787-.19642076-.27512512-.4377394.4295022-.89338765.8380491-1.37022782 1.22121896-2.80469685 2.2036925-6.16050168 3.30524297-10.06703 3.30524297-2.9048593 0-5.08315996-.17519927-6.53558223-.52577529v-.07482977c.80134407-.8514327 1.3517422-2.17856685 1.65224439-3.98157991l5.10878842-30.95153206c.25041355-1.65275607.6256124-2.83027355 1.1264543-3.53144333.5008271-.70117421.75198008-1.12675599.75198008-1.27700707 0-.250418-.27595328-.37522992-.8268838-.37522992zm20.57424097 18.24107964c-1.2648465 0-2.3887276.16606-3.37248774.4982687-.27599764 3.4309422-.9461382 6.60332536-2.0259348 9.50762271-.22719562.60323742-.47336488 1.18451392-.73364235 1.74853226.28599466.42797899.59500022.85714105.94838605 1.28693903l2.77257625 3.20587909c.98580094-1.50458128 1.84337234-3.13424363 2.57158731-4.8894455 1.45916582-3.46550588 2.38417127-7.10433289 2.7802219-10.91530979-.83281399-.29483818-1.81303967-.4424865-2.94070662-.4424865z"/>
+  <path d="M48.09482175 28.00193633c.15977488.27871577.3232173.56918988.49139205.87273552 0 1.10969894-.04480914 2.204602-.12910355 3.2868949 1.81092491.90616343 2.77293117 2.6610636 2.87115634 5.27995783.1001181 1.00168379.20016225 1.7024661.3003395 2.10313075.1502511.3505908.42543537.5265443.8261148.5265443.55091573 0 1.05245268-.37596787 1.50320595-1.12722331 1.20200871-1.90317553 1.80279124-3.58069345 1.80279124-5.0331231 0-1.90317553-.80155111-3.35588026-2.40422446-4.35755517-1.40607513-.92273245-3.16161713-1.438212-5.2616275-1.55136172zm-7.00711333 1.15091151c-.66994831.28251937-1.31490407.61307916-1.93041593 1.00112183-2.30385496 1.40234399-4.05732658 3.25583462-5.25933529 5.5596674-1.20200871 2.30385495-1.80279124 4.75810888-1.80279124 7.36246602 0 1.60267335.22558367 2.97943769.67633694 4.13135777.31946103.78090637.73208956 1.54931647 1.22961883 2.30487537 1.73436488-1.72768049 3.1574024-3.8245557 4.26968933-6.28950171-.9061797-1.56372046-1.36719618-3.11566928-1.36719618-4.65484085 0-2.2036925.70078232-3.9315948 2.10313075-5.18368475.55977403-.51979334 1.20937338-.93302229 1.94492344-1.24490421.07808325-.9741269.12259661-1.97004614.13605414-2.98655687zm1.88989546 19.91089424c-1.36604267 2.07522486-2.97886093 3.91097965-4.83672452 5.50770802l3.87075495 4.58147514c1.50252568 1.80301306 2.57927585 3.43093037 3.23035404 4.88335263.65110777 1.45243706.97667645 3.02995518.97667645 4.732791 0 2.85477068-.7759818 5.08347052-2.32856653 6.68612909-1.5526143 1.60268814-3.63090038 2.40345545-6.23525752 2.40345545-3.25543533 0-5.50968968-1.12636556-6.76178554-3.3801319-1.25209142-2.30385496-2.00325666-4.83330838-2.25367612-7.58790181 0-.30050218-.12481488-.45090116-.37522844-.45088637-.40066907 0-.97663947.35116756-1.72789491 1.05231959-.75125545.70116682-1.40241793 1.57714841-1.9533381 2.62890603-.5509172 1.05175763-.82688232 2.0788924-.82688232 3.0805614.10016246 1.15193488.55132685 2.37906924 1.35266205 3.68122562.85142678 1.30217118 2.0785567 2.42853675 3.6812345 3.3801319 1.60267778.90150654 3.53058115 1.35267388 5.78434748 1.35267388 2.80469685 0 5.50934955-.75116671 8.1136919-2.2536776 2.65444576-1.55258472 4.78311623-3.58128498 6.38580437-6.08545008 1.65276198-2.55426851 2.4791134-5.2837363 2.4791134-8.18859561 0-4.00669078-1.55270304-7.83847804-4.65788728-11.49457801z"/>
+  <path d="M3.698979-.0004411C1.6612-.000441-.000239 1.6728151-.000239 3.7144027v80.5703125c0 2.041587 1.66144 3.714844 3.699218 3.714844h55.601563c2.037779 0 3.699219-1.673257 3.699219-3.714844V3.7144027c0-2.041587-1.661439-3.7148437-3.699219-3.7148438zm0 1.6406251h55.601563c1.152589 0 2.058594.9084921 2.058594 2.0742187v80.5703125c0 1.165726-.906004 2.074219-2.058594 2.074219H3.698979c-1.152589 0-2.058593-.908494-2.058593-2.074219V3.7144027c0-1.165726.906004-2.0742187 2.058593-2.0742187z"/>
+</svg>
+    </a>
+  
+  <ul tabindex="-1">
+        <li
+      x-data="{ isOpen: $persist(true).as('drawer_earthbornerangers_isOpen') }"
+    >
+      <h2
+        tabindex="0"
+        @click="isOpen = !isOpen"
+        @keyup.enter="isOpen = !isOpen"
+        class="
+          flex gap-2 items-center p-2 cursor-pointer
+          hover:bg-green-800 active:bg-green-700 transition-colors
+          focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+        "
+      >
+                  <picture>
+            <source
+              srcset="https://decksmith.app/media/pages/earthbornerangers/9bcd7b66cf-1733529094/logo-32x-q90.webp"
+              type="image/webp"
+            >
+            <img src="https://decksmith.app/media/pages/earthbornerangers/9bcd7b66cf-1733529094/logo-32x.png" alt="" width="32" height="32">
+          </picture>
+                <div class="grow">
+          Earthborne Rangers        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          role="img"
+          class="size-6 fill-white cursor-pointer transition"
+          :class="isOpen && 'rotate-180'"
+        >
+          <path d="M480-360 280-560h400L480-360Z"/>
+        </svg>
+      </h2>
+
+      <ul x-show="isOpen" x-transition.duration.100ms>
+        <li>
+          <a
+            href="https://decksmith.app/earthbornerangers/cards"
+            @click="$store.tabs.active = '1'; closeDrawer()"
+            class="
+              flex gap-2 items-center p-2 pl-10
+              hover:bg-green-800 active:bg-green-700 transition-colors
+              focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+            "
+            :class="'' && 'bg-green-800/60'"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              role="img"
+              class="size-8 fill-white p-1"
+            >
+              <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-360h160v-200H160v200Zm240 0h160v-200H400v200Zm240 0h160v-200H640v200ZM320-240v-200H160v200h160Zm80 0h160v-200H400v200Zm240 0h160v-200H640v200Z"/>
+            </svg>
+            Cards
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://decksmith.app/earthbornerangers/decks"
+            @click="closeDrawer()"
+            class="
+              flex gap-2 items-center p-2 pl-10
+              hover:bg-green-800 active:bg-green-700 transition-colors
+              focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+            "
+            :class="'' && 'bg-green-800/60'"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              role="img"
+              class="size-8 fill-white p-1"
+            >
+              <path d="M120-280v-400q0-33 23.5-56.5T200-760h560q33 0 56.5 23.5T840-680v400q0 33-23.5 56.5T760-200H200q-33 0-56.5-23.5T120-280Zm80-320h80v-80h-80v80Zm160 0h400v-80H360v80Zm0 160h400v-80H360v80Zm0 160h400v-80H360v80Zm-160 0h80v-80h-80v80Zm0-160h80v-80h-80v80Z"/>
+            </svg>
+            Decks
+          </a>
+        </li>
+      </ul>
+    </li>
+        <li
+      x-data="{ isOpen: $persist(true).as('drawer_hubworldaidalon_isOpen') }"
+    >
+      <h2
+        tabindex="0"
+        @click="isOpen = !isOpen"
+        @keyup.enter="isOpen = !isOpen"
+        class="
+          flex gap-2 items-center p-2 cursor-pointer
+          hover:bg-green-800 active:bg-green-700 transition-colors
+          focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+        "
+      >
+                  <picture>
+            <source
+              srcset="https://decksmith.app/media/pages/hubworldaidalon/3cf14306ca-1746571777/logo-32x-q90.webp"
+              type="image/webp"
+            >
+            <img src="https://decksmith.app/media/pages/hubworldaidalon/3cf14306ca-1746571777/logo-32x.png" alt="" width="32" height="32">
+          </picture>
+                <div class="grow">
+          Hubworld: Aidalon        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          role="img"
+          class="size-6 fill-white cursor-pointer transition"
+          :class="isOpen && 'rotate-180'"
+        >
+          <path d="M480-360 280-560h400L480-360Z"/>
+        </svg>
+      </h2>
+
+      <ul x-show="isOpen" x-transition.duration.100ms>
+        <li>
+          <a
+            href="https://decksmith.app/hubworldaidalon/cards"
+            @click="$store.tabs.active = '1'; closeDrawer()"
+            class="
+              flex gap-2 items-center p-2 pl-10
+              hover:bg-green-800 active:bg-green-700 transition-colors
+              focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+            "
+            :class="'' && 'bg-green-800/60'"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              role="img"
+              class="size-8 fill-white p-1"
+            >
+              <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-360h160v-200H160v200Zm240 0h160v-200H400v200Zm240 0h160v-200H640v200ZM320-240v-200H160v200h160Zm80 0h160v-200H400v200Zm240 0h160v-200H640v200Z"/>
+            </svg>
+            Cards
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://decksmith.app/hubworldaidalon/decks"
+            @click="closeDrawer()"
+            class="
+              flex gap-2 items-center p-2 pl-10
+              hover:bg-green-800 active:bg-green-700 transition-colors
+              focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+            "
+            :class="'' && 'bg-green-800/60'"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+              role="img"
+              class="size-8 fill-white p-1"
+            >
+              <path d="M120-280v-400q0-33 23.5-56.5T200-760h560q33 0 56.5 23.5T840-680v400q0 33-23.5 56.5T760-200H200q-33 0-56.5-23.5T120-280Zm80-320h80v-80h-80v80Zm160 0h400v-80H360v80Zm0 160h400v-80H360v80Zm0 160h400v-80H360v80Zm-160 0h80v-80h-80v80Zm0-160h80v-80h-80v80Z"/>
+            </svg>
+            Decks
+          </a>
+        </li>
+      </ul>
+    </li>
+          </ul>
+
+  <div class="grow"></div>
+
+  <ul>
+      <li>
+      <a
+        href="https://decksmith.app/register"
+        @click="closeDrawer()"
+        class="
+          flex gap-2 items-center p-2 hover:bg-green-800 active:bg-green-700 transition-colors
+          focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+        "
+        :class="'' && 'bg-green-800/60'"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          role="img"
+          class="size-8 fill-white p-1"
+        >
+          <path d="M720-520h-80q-17 0-28.5-11.5T600-560q0-17 11.5-28.5T640-600h80v-80q0-17 11.5-28.5T760-720q17 0 28.5 11.5T800-680v80h80q17 0 28.5 11.5T920-560q0 17-11.5 28.5T880-520h-80v80q0 17-11.5 28.5T760-400q-17 0-28.5-11.5T720-440v-80Zm-360 40q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-240v-32q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v32q0 33-23.5 56.5T600-160H120q-33 0-56.5-23.5T40-240Zm80 0h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0-80Zm0 400Z"/>
+        </svg>
+        Register
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://decksmith.app/login"
+        @click="closeDrawer()"
+        class="
+          flex gap-2 items-center p-2 hover:bg-green-800 active:bg-green-700 transition-colors
+          focus:outline-none focus-visible:ring-4 ring-green-600 ring-inset
+        "
+        :class="'' && 'bg-green-800/60'"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          role="img"
+          class="size-8 fill-white p-1"
+        >
+          <path d="M520-120q-17 0-28.5-11.5T480-160q0-17 11.5-28.5T520-200h240v-560H520q-17 0-28.5-11.5T480-800q0-17 11.5-28.5T520-840h240q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H520Zm-73-320H160q-17 0-28.5-11.5T120-480q0-17 11.5-28.5T160-520h287l-75-75q-11-11-11-27t11-28q11-12 28-12.5t29 11.5l143 143q12 12 12 28t-12 28L429-309q-12 12-28.5 11.5T372-310q-11-12-10.5-28.5T373-366l74-74Z"/>
+        </svg>
+        Login
+      </a>
+    </li>
+    </ul>
+</nav>
+
+<div
+  x-show="drawerOpen"
+  @click="drawerOpen = false"
+  class="
+    fixed inset-0 z-30 w-screen h-screen bg-neutral-900 opacity-30
+    lg:hidden
+  "
+></div>
+
+  <div
+    :class="drawerOpen && 'lg:absolute lg:left-64 lg:w-[calc(100%-256px)]'"
+  >
+    <div
+      class="
+        xl:container mx-auto
+        pt-12      "
+    >
+
+
+<div class="m-4 md:m-8">
+  <div class="p-4 max-w-fit mx-auto rounded-md shadow-sm shadow-neutral-500/50 bg-neutral-500 text-sm uppercase tracking-wider text-white">
+    In-development content: Final art, graphics, and text may vary
+  </div>
+</div>
+
+<div class="m-4 md:m-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 rounded-md shadow-sm shadow-green-950/50 bg-green-900">
+  <div class="col-span-1 p-4 justify-items-center">
+    <img
+      src="https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/canal-network/347f6b777c-1770745709/card.webp"
+      alt="Canal Network"
+      class="rounded-md"
+    >
+  </div>
+
+  <div class="col-span-1 lg:col-span-2 xl:col-span-3 rounded-md p-4 text-white
+          bg-omniworks
+      ">
+    <h1 class="text-3xl mb-4 flex flex-col sm:max-md:flex-row lg:flex-row items-baseline sm:max-md:gap-2 lg:gap-2">
+      <div>
+                  Canal Network              </div>
+          </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 xl:gap-16">
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4">
+                      <div class="flex justify-between gap-4 items-center">
+              <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+                Shard Cost
+              </div>
+              <div class="text-black">
+                <div class="inline-flex rounded-md bg-neutral-300">
+                  <div class="rounded-md px-3 py-1 bg-neutral-50">
+                    3                  </div>
+                </div>
+              </div>
+            </div>
+          
+                      <hr class="border-white opacity-20">
+          
+                      <div class="flex justify-between gap-4 items-center">
+              <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+                Barrier
+              </div>
+              <div class="text-black">
+                <div class="inline-flex rounded-md bg-neutral-300">
+                  <div class="rounded-md px-3 py-1 bg-neutral-50">
+                    2                  </div>
+                </div>
+              </div>
+            </div>
+          
+                      <hr class="border-white opacity-20">
+          
+                      <div class="flex justify-between gap-4 items-center">
+              <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+                Scrap Cost
+              </div>
+              <div class="text-black">
+                <div class="inline-flex rounded-md bg-neutral-300">
+                  <div class="rounded-md px-3 py-1 bg-neutral-50">
+                    5                  </div>
+                </div>
+              </div>
+            </div>
+          
+          
+          
+          
+          
+          
+                    <div class="rounded-sm p-2 shadow-sm shadow-black/40 bg-white/60 text-black">
+                          <p><strong>(Confront) Choose a player:</strong> Shift an unforged card in their grid.<br />                              <hr class="border-black opacity-20 my-1">
+                                        <strong>(Discover) If this card is in your grid, choose a player:</strong> Shift a card in their grid <em>(forged or unforged)</em>.</p>                          
+                      </div>
+          
+                  </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+                  <div class="flex justify-between gap-4 items-center">
+            <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+              Traits
+            </div>
+            <div class="flex flex-wrap justify-end gap-2 text-black">
+                              <div class="inline-flex rounded-md bg-neutral-300">
+                  <div class="rounded-md px-3 py-1 bg-neutral-50">
+                    Location                  </div>
+                </div>
+                          </div>
+          </div>
+        
+                  <hr class="border-white opacity-20">
+        
+                  <div class="flex justify-between gap-4 items-center">
+            <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+              Type
+            </div>
+            <div class="text-black">
+              <div class="inline-flex rounded-md bg-neutral-300">
+                <div class="rounded-md px-3 py-1 bg-neutral-50">
+                  Obstacle                </div>
+              </div>
+            </div>
+          </div>
+        
+                  <hr class="border-white opacity-20">
+        
+                  <div class="flex justify-between gap-4 items-center">
+            <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+              Affiliation
+            </div>
+            <div class="text-black">
+              <div class="inline-flex rounded-md bg-neutral-300">
+                <div class="rounded-md px-3 py-1 bg-neutral-50">
+                  Omniworks                </div>
+              </div>
+            </div>
+          </div>
+        
+                  <hr class="border-white opacity-20">
+        
+                  <div class="flex justify-between gap-4 items-center">
+            <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+              Affiliation Icons
+            </div>
+            <div class="text-black">
+              <div class="inline-flex rounded-md bg-neutral-300">
+                <div class="rounded-md px-3 py-1 bg-neutral-50">
+                  3                </div>
+              </div>
+            </div>
+          </div>
+        
+                  <hr class="border-white opacity-20">
+        
+                  <div class="flex justify-between gap-4 items-center">
+            <div class="uppercase tracking-wider text-sm text-ellipsis overflow-hidden">
+              Set
+            </div>
+            <div class="text-black">
+              <div class="inline-flex rounded-md bg-neutral-300">
+                <div class="rounded-md px-3 py-1 bg-neutral-50">
+                  Prime Collective                </div>
+              </div>
+            </div>
+          </div>
+        
+                  <hr class="border-white opacity-20">
+        
+                  <div class="flex justify-between gap-4 items-baseline">
+            <div class="uppercase tracking-wider text-sm">
+              Illustrator
+            </div>
+            <div class="flex flex-wrap justify-end gap-2 text-black">
+                              <div class="inline-flex rounded-md bg-neutral-300">
+                  <div class="rounded-md px-3 py-1 bg-neutral-50">
+                    Evan Simonet                  </div>
+                </div>
+                          </div>
+          </div>
+              </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  </body>
+</html>
