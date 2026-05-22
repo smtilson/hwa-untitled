@@ -40,7 +40,6 @@ def fetch_html_content(url):
         return None
 
 
-
 def fetch_card_data(html_content):
     soup = BeautifulSoup(html_content, "html.parser")
     imgs = soup.select("img")

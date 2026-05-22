@@ -18,11 +18,20 @@ Hub for all Hubworld: Aidalon-related projects. This repository is designed to b
 
 **Current Progress**:
 
-- [ ] Core scraping functionality from DeckSmith
-- [ ] Card image downloading
+- [x] Core scraping functionality from DeckSmith
+- [x] HTML parsing for card metadata (name, type, traits, faction, image, ability text, shardCost, barrier, scrapCost)
+- [x] Sample-data driven extraction tests (`card_scraper/test_extraction.py`)
+- [x] Card image downloading
 - [ ] CSV/TSV generation for DragnCards format
 - [ ] Data validation and error handling
 - [ ] Support for additional data sources
+
+**Recent Changes** (May 18, 2026):
+
+- Fixed `_find_by_text_and_get_sibling` to use `select_one` (CSS selectors) and anchored regex so labels like `Type` no longer match unrelated text
+- Fixed `get_card_image_url` to return the actual card image (`card.webp`) rather than the site logo
+- Added `get_card_traits` returning a list of traits; `traits` now included in `get_card_data` output
+- `cardBack` is no longer extracted in the scraper; it will be injected downstream
 
 ---
 
@@ -49,16 +58,23 @@ Hub for all Hubworld: Aidalon-related projects. This repository is designed to b
 
 ### 3. **Web App: Shard/Heat Tracker** (`web_app/`)
 
-**Status**: Planned  
-**Tech Stack**: JavaScript/React  
+**Status**: In Progress  
+**Tech Stack**: React + TypeScript + Vite + TailwindCSS v4  
 **Purpose**: Small interactive app for tracking in-game resources  
 **Features**:
 
-- Shard pool tracking
-- Heat tracking
-- Network count tracking
-- Quick reference card info pop up.
-- Potentially multiplayer/session-based
+- [x] Project scaffolding (Vite + React + TS)
+- [x] TailwindCSS v4 styling
+- [x] Reusable `Tracker` component (label, value, +/- buttons)
+- [x] Heat tracker (default 0)
+- [x] Shard tracker (default 5)
+- [x] Reset button
+- [ ] Network count tracking
+- [ ] Multi-player support (track resources for multiple players)
+- [ ] Quick reference card info pop up
+- [ ] Local storage / persistence
+- [ ] Potentially multiplayer/session-based
+- [ ] Vanilla JS version for easy GitHub Pages hosting (no build step required)
 
 **Depends On**: Nothing.
 
@@ -165,11 +181,12 @@ module_name/
 ### Active Work
 
 - [ ] Card Scraper: Complete DragnCards format output
+- [ ] Web App: Build out Heat/Shard tracker UI (scaffolding complete)
 
 ### Next Up
 
 - [ ] Card Query Service: Design and initial setup
-- [ ] Web App: Project scaffolding
+- [ ] Web App: Add network count tracker and card reference popup
 
 ### Future
 
