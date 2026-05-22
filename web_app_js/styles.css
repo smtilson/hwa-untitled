@@ -83,6 +83,41 @@ body {
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   background: var(--surface);
+  flex: 1 1 18rem;
+  max-width: 24rem;
+}
+
+/* Mobile: stack player panels vertically, shrink tracker widths */
+@media (max-width: 640px) {
+  .page {
+    padding: 1rem 0.75rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .players {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .player {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .tracker {
+    width: 100%;
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  .tracker__box {
+    width: 100%;
+    max-width: 14rem;
+  }
 }
 
 .player__heading {
