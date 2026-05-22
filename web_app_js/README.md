@@ -12,18 +12,23 @@ A no-build version of the Hubworld: Aidalon resource tracker. Mirrors the functi
 
 - **Heat Tracking**: +/- controls (default: 0)
 - **Shard Pool Tracking**: +/- controls (default: 5)
-- **Reset Button**: Restore both trackers to default values
-- **Reusable `createTracker` factory**: Generic label/value/+/- component used for both trackers
-- **Dark Mode Support**: Automatic via `prefers-color-scheme`
+- **Reset Button**: Restore all trackers to default values
+- **Reusable `createTracker` factory**: Generic label/value/+/- component
+- **Single-player and Two-player pages**: Two-player page (`two-player.html`) shows one tracker set per player
+- **Light/Dark mode toggle**: Manual theme switch with `localStorage` persistence; defaults to system preference on first visit
+- **Responsive layout**: Player panels stack vertically on mobile (≤ 640px); trackers scale to fit narrow screens
 
 ## File Structure
 
 ```
 web_app_js/
-├── index.html      # Page markup, includes scripts and styles
-├── styles.css      # All styling (uses CSS variables for theming)
-├── tracker.js      # Reusable createTracker() factory
-├── app.js          # App entry: instantiates trackers + wires reset
+├── index.html        # Single-player page
+├── two-player.html   # Two-player page
+├── styles.css        # All styling (CSS variables for theming, responsive media queries)
+├── tracker.js        # Reusable createTracker() factory
+├── theme.js          # Light/dark theme toggle (localStorage-backed)
+├── app.js            # Single-player entry: heat + shards + reset
+├── two-player.js     # Two-player entry: builds a panel per player
 └── README.md
 ```
 
@@ -58,7 +63,7 @@ Factory that returns a tracker control.
 
 **Options:**
 
-- `label: string` - Display label (e.g. `"Heat"`)
+- `label: string` - Display label (e.g. `"Heat"`, `"P1 Heat"`)
 - `value: number` - Initial value
 - `onChange?: (newValue: number) => void` - Called whenever the value changes
 - `min?: number` - Minimum value (default `0`)
@@ -68,6 +73,16 @@ Factory that returns a tracker control.
 - `element: HTMLElement` - The root DOM node to append
 - `getValue(): number` - Read current value
 - `setValue(v: number): void` - Programmatically set value (used by Reset)
+
+## Theme Toggle (`theme.js`)
+
+Manages a `data-theme` attribute on the `<html>` element (`light` or `dark`).
+
+- Persists the user's choice to `localStorage` under the key `hwa-theme`.
+- Falls back to `prefers-color-scheme` on first visit.
+- Wires up a `#theme-toggle` button on each page; the button label updates to reflect the action it performs ("Dark mode" / "Light mode").
+
+CSS variables are scoped to `:root` (light) and `[data-theme="dark"]` (dark) so adding new theme-aware styles is just a matter of using the variables.
 
 ## Customizing the Look
 
