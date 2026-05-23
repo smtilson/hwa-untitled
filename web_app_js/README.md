@@ -18,6 +18,11 @@ A no-build version of the Hubworld: Aidalon resource tracker. Mirrors the functi
 - **Light/Dark mode toggle**: Manual theme switch with `localStorage` persistence; defaults to system preference on first visit
 - **Responsive layout**: Player panels stack vertically on mobile (≤ 640px); trackers scale to fit narrow screens
 
+### Future Features
+- **Player Toggle**: Toggle between players on two-player page.
+- **Screen On**: Keep screen on during gameplay.
+- **Adjust Boxes**: Adjust the size and positions of the tracker boxes.
+
 ## File Structure
 
 ```
