@@ -22,6 +22,7 @@ A no-build version of the Hubworld: Aidalon resource tracker. Mirrors the functi
 - **Player Toggle**: Toggle between players on two-player page.
 - **Screen On**: Keep screen on during gameplay.
 - **Adjust Boxes**: Adjust the size and positions of the tracker boxes.
+- **Sync with other Repo**: Need to set up github action/workflow so that the other repo is synced with this subdirectory.
 
 ## File Structure
 

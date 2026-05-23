@@ -56,12 +56,17 @@ Hub for all Hubworld: Aidalon-related projects. This repository is designed to b
 
 ---
 
-### 3. **Web App: Shard/Heat Tracker** (`web_app/`)
+### 3. **Web App: Shard/Heat Tracker**
 
 **Status**: In Progress  
-**Tech Stack**: React + TypeScript + Vite + TailwindCSS v4  
 **Purpose**: Small interactive app for tracking in-game resources  
-**Features**:
+**Depends On**: Nothing.
+
+There are two parallel implementations:
+
+#### 3a. React version (`web_app_react/`)
+
+**Tech Stack**: React + TypeScript + Vite + TailwindCSS v4
 
 - [x] Project scaffolding (Vite + React + TS)
 - [x] TailwindCSS v4 styling
@@ -71,12 +76,26 @@ Hub for all Hubworld: Aidalon-related projects. This repository is designed to b
 - [x] Reset button
 - [ ] Network count tracking
 - [ ] Multi-player support (track resources for multiple players)
+- [ ] Light/dark mode toggle (parity with vanilla JS version)
+- [ ] Responsive layout (parity with vanilla JS version)
 - [ ] Quick reference card info pop up
 - [ ] Local storage / persistence
 - [ ] Potentially multiplayer/session-based
-- [ ] Vanilla JS version for easy GitHub Pages hosting (no build step required)
 
-**Depends On**: Nothing.
+#### 3b. Vanilla JS version (`web_app_js/`)
+
+**Tech Stack**: HTML + CSS + Vanilla JavaScript (no build step)
+
+- [x] Static no-build site (HTML/CSS/JS only)
+- [x] Reusable `createTracker` factory
+- [x] Single-player page (`index.html`) with Heat + Shards + Reset
+- [x] Two-player page (`two-player.html`) labelled by player number
+- [x] Light/dark mode toggle with `localStorage` persistence
+- [x] Responsive layout (player panels stack vertically on mobile)
+- [ ] GitHub Actions workflow to deploy to GitHub Pages
+- [ ] Network count tracking
+- [ ] Quick reference card info popup
+- [ ] Persist tracker values across reloads
 
 ---
 
@@ -181,12 +200,14 @@ module_name/
 ### Active Work
 
 - [ ] Card Scraper: Complete DragnCards format output
-- [ ] Web App: Build out Heat/Shard tracker UI (scaffolding complete)
+- [ ] Web App (vanilla JS): Set up GitHub Actions workflow to deploy `web_app_js/` to GitHub Pages
+- [ ] Web App (React): Bring to feature parity with vanilla JS version (theme toggle, responsive layout, two-player view)
 
 ### Next Up
 
 - [ ] Card Query Service: Design and initial setup
 - [ ] Web App: Add network count tracker and card reference popup
+- [ ] Web App: Persist tracker values to local storage
 
 ### Future
 
