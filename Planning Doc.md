@@ -129,6 +129,17 @@ There are two parallel implementations:
 
 ---
 
+### 6. **OP rules study** (`op_rules_study/`)
+
+**Status**: Planned  
+**Purpose**: Study different OP rule set options.  
+**Features**:
+
+- Comprehensive rule documentation
+- Analysis of rule interactions
+- Examples and edge cases
+- Comparison between different rule sets
+
 ## Module Architecture & Dependencies
 
 ```

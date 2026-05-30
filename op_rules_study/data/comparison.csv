@@ -1,0 +1,5 @@
+algorithm,mean_skill_gap,standings_skill_correlation,rematch_count,rounds,players
+adjacent,0.836402,0.844751,0.020000,5.000000,32.000000
+fold,0.877730,0.866056,0.020000,5.000000,32.000000
+random_within_record,0.884023,0.859611,0.020000,5.000000,32.000000
+random,1.118438,0.832991,0.320000,5.000000,32.000000

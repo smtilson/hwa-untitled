@@ -1,0 +1,13 @@
+# Core simulation (tournament/, scripts/) uses only the Python standard library.
+# The dependencies below are for the analysis notebook and plotting only.
+
+# Notebook + analysis
+jupyter>=1.0
+pandas>=2.0
+matplotlib>=3.7
+
+# Optional: nicer statistical plots / correlations in the notebook
+seaborn>=0.13
+
+# Testing
+pytest>=8.0

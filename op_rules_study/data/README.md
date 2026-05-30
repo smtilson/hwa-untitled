@@ -1,0 +1,22 @@
+# Data directory
+
+Generated CSVs land here. They are produced by `scripts/generate_records.py`
+and `scripts/run_pairing.py`, and consumed by the notebook and any analysis
+scripts. Nothing here is hand-edited.
+
+## File types
+
+- **`<tag>_players.csv`** — the player pool with latent `skill` (ground truth).
+  Columns: `pid, name, skill`.
+- **`<tag>_matches.csv`** — one row per match (raw results).
+  Columns: `round, player_a, player_b, agents_a, agents_b, winner, result_a, result_b, is_bye`.
+- **`<tag>_standings.csv`** — per-player record snapshot after each round.
+  Columns: `through_round, pid, name, match_wins, match_losses, agents_for, agents_against, agent_diff, match_points, record`.
+- **`*_comparison.csv`** — algorithm-vs-algorithm metric tables from `run_pairing.py`.
+
+`<tag>` defaults to the pairing algorithm name (e.g. `adjacent_matches.csv`).
+
+## Reproducibility
+
+Every file is produced from an explicit `--seed`. Re-running with the same seed
+and arguments reproduces the file exactly.
