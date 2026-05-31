@@ -1,0 +1,17 @@
+Prompt:
+I want to do a study on different tournament rule sets for hubworld aidalon. The idea is that there will be organized play events consisting of multiple different rounds. Each round will consist of players paired up and each pair play one match. A match consists of two games of hubworld aidalon. The game is one by a player who has captured 3 agents. At the end of each game we keep track of how many agents are won. At the end of the second game, if the number of agents scored is tied then they continue playing until the next agent is scored. So for each match a player gets a result consisting of number of wins-number of losses (number of agents scored-number of agents opponent scores). Based on the outcome of a players match in the previous n-1 rounds, the players will then be paired for round n. The primary way to pair players is based on record. This will divide the player pool into different groups. We want to figure out good ways of sorting these groups so that players ideally play people of comparable strength.
+
+the main goal is to compare different pairing algorithms. the goal of each algorithm should be to accurately pair people based on strength. Later we will look at ways algorithms can be manipulated. A secondary goal is that the players understand the algorithm. So there will be room for discussing that but do not necessarily give input for that. That is for us to think about.
+
+Here is what I want the project to consist of:
+-planning document outlining the setup, things the study does, things the study wants to do.
+-a file for generating different records in a tournament or round of a tournament. I am currently agnostic about how to do this. Should these be computed essentially randomly? should there be a distribution that does this? should the records for the whole tournment be essentially random and then we look at what different pairing algorithms would do. Or do we have a way of producing results from a single round and then do the pairing to get the next round and then pair again etc. There should be room to discuss the different approaches.
+-various csv's that keep track of what has been produced that can be accessed for studying with different scripts.
+-a jupyter notebook that is easy to follow
+-files with python scripts for ease of use.
+-a readme that explains how to use the project.
+-prompts and room for pros cons at various stages related to decisions made between different functions
+-the project should be viewed as looking at different families of functions onf the previous n-1 rounds and they should produce an ordering of the players or a pairing (which is I guess the same thing).
+- I want to see what happens if we change the function from one round to the next.
+
+Please prepare the relevant directory. Suggest a requirements file, create the readme, create the planning document, create the csv file directory, cretate the notebook directory, create the script directory, create a directory for modeling what a tournament looks like with classes that are computationally efficient, like data classes or something.
