@@ -131,41 +131,30 @@ class Match:
     def agent_score(self):
         return (self.total_agents_a, self.total_agents_b)
 
-    @check_validity
-    @property
-    def winner_is_a(self) -> bool:
-        if not self.game_1_winner == self.player_a:
-            return False
-        elif not self.game_2_winner == self.player_a:
-            return False
-        return True
+    def _compute_results(self) -> dict:
+        self._results = {
+            self.player_a: self._player_a_result(),
+            self.player_b: self._player_b_result(),
+            f"{self.player_a}_agents": self.total_agents_a,
+            f"{self.player_b}_agents": self.total_agents_b,
+            f"{self.player_a}_wins": 0,
+            f"{self.player_b}_wins": 0,
+            "is_draw": self.is_draw,
+            "is_bye": self.is_bye,
+        }
+        for game in self.games:
+            if game.winner_is_a:
+                self._results[f"{self.player_a}_wins"] += 1
+            else:
+                self._results[f"{self.player_b}_wins"] += 1
+        return self._results
 
     @check_validity
     @property
-    def winner(self) -> int:
-        """Player id of the match winner (``player_a`` always wins a bye)."""
-        if self.is_bye:
-            return self.player_a
-        elif self.is_draw:
-            return None
-        elif self.winner_is_a:
-            return self.player_a
-        return self.player_b
-
-    @check_validity
-    @property
-    def loser(self) -> int:
-        if self.is_bye:
-            return BYE
-        elif self.is_draw:
-            return None
-        return self.player_b if self.winner == self.player_a else self.player_a
-
-    def agents_for(self, pid: int) -> int:
-        return self.total_agents_a if pid == self.player_a else self.total_agents_b
-
-    def agents_against(self, pid: int) -> int:
-        return self.total_agents_b if pid == self.player_a else self.total_agents_a
+    def results(self) -> dict:
+        if not hasattr(self, "_results"):
+            self._compute_results()
+        return self._results
 
 
 @dataclass(slots=True)
@@ -185,9 +174,9 @@ class Round:
                 valid = False
                 error_msg += f"Round {self.number} match between {match.player_a} and {match.player_b} is invalid because:\n"
                 error_msg += match_msg
-            
+
         return valid, error_msg
-    
+
     @check_validity
     def opponents(self) -> dict[int, int]:
         """Map every player id to the id they faced this round."""
@@ -197,6 +186,36 @@ class Round:
             if not m.is_bye:
                 table[m.player_b] = m.player_a
         return table
+
+    def player_results(self, player_id: int) -> dict:
+        """
+        Returns a dictionary with the results of the player's matches in this round.
+        """
+        for match in self.matches:
+            if match.player_a == player_id:
+                opponent = match.player_b
+                break
+            elif match.player_b == player_id:
+                opponent = match.player_a
+                break
+        else:
+            raise ValueError(f"Player {player_id} not found in round {self.number}")
+
+        results = {
+            "player": {
+                "id": player_id,
+                "wins": match.results.get(f"{player_id}_wins", 0),
+                "losses": match.results.get(f"{opponent}_wins", 0),
+                "agents": match.results.get(f"{player_id}_agents", 0),
+            },
+            "opponent": {
+                "id": opponent,
+                "wins": match.results.get(f"{opponent}_wins", 0),
+                "losses": match.results.get(f"{player_id}_wins", 0),
+                "agents": match.results.get(f"{opponent}_agents", 0),
+            },
+        }
+        return results
 
 
 @dataclass(slots=True)
