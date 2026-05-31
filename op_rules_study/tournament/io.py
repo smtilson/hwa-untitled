@@ -18,12 +18,27 @@ from .models import BYE, Game, Match, Player, Round, Tournament
 from .standings import Record, compute_records
 
 MATCH_FIELDS = [
-    "round", "player_a", "player_b", "agents_a", "agents_b",
-    "winner", "result_a", "result_b", "is_bye",
+    "round",
+    "player_a",
+    "player_b",
+    "agents_a",
+    "agents_b",
+    "winner",
+    "result_a",
+    "result_b",
+    "is_bye",
 ]
 STANDINGS_FIELDS = [
-    "through_round", "pid", "name", "match_wins", "match_losses",
-    "agents_for", "agents_against", "agent_diff", "match_points", "record",
+    "through_round",
+    "pid",
+    "name",
+    "match_wins",
+    "match_losses",
+    "agents_for",
+    "agents_against",
+    "agent_diff",
+    "match_points",
+    "record",
 ]
 
 
@@ -35,27 +50,41 @@ def write_matches(tournament: Tournament, path: str | Path) -> None:
         w.writeheader()
         for rnd in tournament.rounds:
             for m in rnd.matches:
-                w.writerow({
-                    "round": rnd.number,
-                    "player_a": m.player_a,
-                    "player_b": m.player_b,
-                    "agents_a": m.agents_a,
-                    "agents_b": m.agents_b,
-                    "winner": m.winner,
-                    "result_a": f"{m.agents_a}-{m.agents_b}",
-                    "result_b": f"{m.agents_b}-{m.agents_a}",
-                    "is_bye": int(m.is_bye),
-                })
+                w.writerow(
+                    {
+                        "round": rnd.number,
+                        "player_a": m.player_a,
+                        "player_b": m.player_b,
+                        # Sean Update: `m.agents_a`/`agents_b`/`winner` were renamed/
+                        # removed on Match. Use `m.total_agents_a` / `m.total_agents_b`
+                        # and read the winner from `m.results`. Note: `read_matches()`
+                        # below rebuilds a single-game Match, which your new
+                        # `Match.is_valid` (expects exactly 2 games) would reject --
+                        # decide whether the CSV should store per-game detail.
+                        "agents_a": m.agents_a,
+                        "agents_b": m.agents_b,
+                        "winner": m.winner,
+                        "result_a": f"{m.agents_a}-{m.agents_b}",
+                        "result_b": f"{m.agents_b}-{m.agents_a}",
+                        "is_bye": int(m.is_bye),
+                    }
+                )
 
 
-def write_standings(tournament: Tournament, path: str | Path, every_round: bool = True) -> None:
+def write_standings(
+    tournament: Tournament, path: str | Path, every_round: bool = True
+) -> None:
     """Write standings. If ``every_round`` is True, emit a snapshot after each
     round (handy for studying how rankings evolve); otherwise only the final.
     """
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     names = {p.pid: p.name for p in tournament.players}
-    rounds = range(1, len(tournament.rounds) + 1) if every_round else [len(tournament.rounds)]
+    rounds = (
+        range(1, len(tournament.rounds) + 1)
+        if every_round
+        else [len(tournament.rounds)]
+    )
 
     with path.open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=STANDINGS_FIELDS)
@@ -63,18 +92,20 @@ def write_standings(tournament: Tournament, path: str | Path, every_round: bool 
         for through in rounds:
             records = compute_records(tournament, through_round=through)
             for rec in records.values():
-                w.writerow({
-                    "through_round": through,
-                    "pid": rec.pid,
-                    "name": names.get(rec.pid, ""),
-                    "match_wins": rec.match_wins,
-                    "match_losses": rec.match_losses,
-                    "agents_for": rec.agents_for,
-                    "agents_against": rec.agents_against,
-                    "agent_diff": rec.agent_diff,
-                    "match_points": rec.match_points,
-                    "record": rec.record_str,
-                })
+                w.writerow(
+                    {
+                        "through_round": through,
+                        "pid": rec.pid,
+                        "name": names.get(rec.pid, ""),
+                        "match_wins": rec.match_wins,
+                        "match_losses": rec.match_losses,
+                        "agents_for": rec.agents_for,
+                        "agents_against": rec.agents_against,
+                        "agent_diff": rec.agent_diff,
+                        "match_points": rec.match_points,
+                        "record": rec.record_str,
+                    }
+                )
 
 
 def write_players(tournament: Tournament, path: str | Path) -> None:
@@ -105,11 +136,15 @@ def read_matches(path: str | Path, players: list[Player]) -> Tournament:
             if int(row["is_bye"]):
                 rnd.matches.append(Match(player_a=int(row["player_a"]), player_b=BYE))
             else:
-                game = Game(agents_a=int(row["agents_a"]), agents_b=int(row["agents_b"]))
-                rnd.matches.append(Match(
-                    player_a=int(row["player_a"]),
-                    player_b=int(row["player_b"]),
-                    games=[game],
-                ))
+                game = Game(
+                    agents_a=int(row["agents_a"]), agents_b=int(row["agents_b"])
+                )
+                rnd.matches.append(
+                    Match(
+                        player_a=int(row["player_a"]),
+                        player_b=int(row["player_b"]),
+                        games=[game],
+                    )
+                )
     tournament.rounds = [rounds[k] for k in sorted(rounds)]
     return tournament

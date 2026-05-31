@@ -13,6 +13,12 @@ Sub-modules
 
 from __future__ import annotations
 
+# Sean Update: These imports still succeed, but several re-exported callables
+# (compute_records, run_tournament, summary, the io helpers) fail at RUNTIME
+# because they reference the old Match API (agents_a/agents_b/winner). Also, the
+# very first import below pulls in models.py, which imports the broken
+# scripts/utils.check_validity -- so right now `import tournament` raises before
+# anything else runs. Fix utils + the Match-API references before relying on this.
 from .models import AGENTS_TO_WIN, BYE, Game, Match, Player, Round, Tournament
 from .standings import Record, compute_records, group_by_record, rank_key
 from .pairing import PairingContext, PairingFunction, REGISTRY, get as get_pairing

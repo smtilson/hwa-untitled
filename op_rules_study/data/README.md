@@ -16,6 +16,14 @@ scripts. Nothing here is hand-edited.
 
 `<tag>` defaults to the pairing algorithm name (e.g. `adjacent_matches.csv`).
 
+> **Schema change pending.** The columns above reflect the *original* `Match`
+> API. The revised model (`tournament/models.py`) reports each match as a
+> per-player `results` dict (`wins`/`losses` = games won/lost 0–2, `agents` =
+> total agents, plus `opponent`, `is_draw`, `is_bye`) and renamed totals to
+> `total_agents_a` / `total_agents_b`. `tournament/io.py` has **not** been
+> re-synced yet, so the match CSV will gain game-record and draw columns once it
+> is. See `PLANNING.md` §5b and `docs/decisions.md` D4/D7.
+
 ## Reproducibility
 
 Every file is produced from an explicit `--seed`. Re-running with the same seed

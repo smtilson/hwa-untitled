@@ -29,8 +29,8 @@ from random import Random
 
 from .models import AGENTS_TO_WIN, Game, Match, Player
 
-
-def win_probability(skill_a: float, skill_b: float) -> float:
+# Windsurf: I want to be agnostic as to how skill is used. Please add a section to the planning document explaining the choice of this function and what other potential functions could be.
+def score_agent_probability(skill_a: float, skill_b: float) -> float:
     """Probability that A captures the next agent, logistic in the skill gap."""
     return 1.0 / (1.0 + math.exp(-(skill_a - skill_b)))
 
@@ -57,6 +57,9 @@ def skilled_match(player_a: Player, player_b: Player, rng: Random) -> Match:
 
     # Sudden death: keep adding single agents until the totals differ.
     p = win_probability(player_a.skill, player_b.skill)
+    # Sean Update: `match.agents_a`/`agents_b` were renamed to
+    # `total_agents_a`/`total_agents_b`, so this comparison now AttributeErrors
+    # and match simulation is broken. Update both references.
     while match.agents_a == match.agents_b:
         if rng.random() < p:
             match.games.append(Game(agents_a=1, agents_b=0))
@@ -77,6 +80,7 @@ def random_match(player_a: Player, player_b: Player, rng: Random) -> Match:
         else:
             games.append(Game(agents_a=loser_agents, agents_b=AGENTS_TO_WIN))
     match = Match(player_a=player_a.pid, player_b=player_b.pid, games=games)
+    # Sean Update: same rename issue -- use `total_agents_a`/`total_agents_b`.
     while match.agents_a == match.agents_b:
         if rng.random() < 0.5:
             match.games.append(Game(agents_a=1, agents_b=0))

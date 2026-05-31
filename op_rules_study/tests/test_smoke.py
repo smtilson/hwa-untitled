@@ -36,6 +36,10 @@ def test_match_never_ties():
     players = make_players(2, rng)
     for _ in range(200):
         m = skilled_match(players[0], players[1], rng)
+        # Sean Update: update to `m.total_agents_a != m.total_agents_b` and derive
+        # the winner from `m.results` -- `agents_a`/`agents_b`/`winner` are gone.
+        # Every test in this file that calls run_tournament/compute_records will
+        # also fail until standings.py + generators.py are fixed.
         assert m.agents_a != m.agents_b
         assert m.winner in (players[0].pid, players[1].pid)
 

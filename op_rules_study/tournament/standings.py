@@ -45,7 +45,9 @@ class Record:
         return f"{self.match_wins}-{self.match_losses}"
 
 
-def compute_records(tournament: Tournament, through_round: int | None = None) -> dict[int, Record]:
+def compute_records(
+    tournament: Tournament, through_round: int | None = None
+) -> dict[int, Record]:
     """Aggregate per-player records.
 
     Parameters
@@ -71,6 +73,11 @@ def compute_records(tournament: Tournament, through_round: int | None = None) ->
                 rec.agents_for += 2
                 continue
 
+            # Sean Update: `Match` no longer exposes `agents_a`/`agents_b`/`winner`
+            # (renamed to `total_agents_a`/`total_agents_b`; `winner` removed), so
+            # this block now raises AttributeError. Switch to `m.total_agents_a` /
+            # `m.total_agents_b`, and derive the winner from `m.results` (or re-add
+            # a `winner` helper on Match). This whole function is unusable until then.
             a, b = records[m.player_a], records[m.player_b]
             a.agents_for += m.agents_a
             a.agents_against += m.agents_b

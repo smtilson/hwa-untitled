@@ -76,10 +76,23 @@ for us to weigh — do not auto-conclude.*
 
 ## D4. Scoring & tiebreakers (`standings.rank_key`)
 
-Options: match-wins only; match points (3/win); agent differential; agents-for;
-strength-of-schedule (opponents' win %). Trade-off between **rewarding margins**
-(agent diff) and **incentivising odd play** (running up agents). Currently:
-`(match_points, agent_diff, agents_for)`.
+**Updated for the revised model.** `Match.results[pid]` now reports, per player,
+**games won/losses** (0–2), **total agents**, the opponent, and `is_draw` /
+`is_bye` flags. So "record" can be defined at several granularities:
+
+- **Game record** — games won vs. lost across the event (0–2 per match; a 1-1
+  split is a draw). This is the most direct reading of the new `results` shape.
+- **Match points** — e.g. 3/win, 1/draw, 0/loss (draws are now possible, so a
+  draw value must be chosen).
+- **Agent differential / agents-for** — from `total_agents_a/total_agents_b`.
+- **Strength-of-schedule** — opponents' win %.
+
+Trade-off between **rewarding margins** (agent diff) and **incentivising odd
+play** (running up agents), plus the new question of **how much a draw is worth**.
+
+> **Pending:** `standings.py` still computes the old `(match_points, agent_diff,
+> agents_for)` from the removed `Match.winner` API and must be rewritten against
+> `Match.results`. Decide the record granularity here first, then implement once.
 
 ---
 
@@ -88,8 +101,14 @@ strength-of-schedule (opponents' win %). Trade-off between **rewarding margins**
 - Rematch avoidance is **greedy/best-effort** (`pairing._avoid_rematches`). A
   perfect constraint solve (max-weight matching) is possible but heavier and
   harder for players to follow. Worth studying how often greedy fails.
-- Byes: odd field → lowest available seed gets a bye, scored as a 2-0 win.
-  Alternative policies (random bye, no repeat byes) are future work.
+- Byes: odd field → lowest available seed gets a bye (`player_b == BYE`),
+  conventionally scored as a 2-0 win. Alternative policies (random bye, no
+  repeat byes) are future work. There is also a `# TODO` to add a flag to
+  **disable byes** entirely.
+- **Model note:** a bye `Match` has **zero games**, but `Match.is_valid` now
+  requires exactly two games, so every bye is currently flagged invalid. The
+  validity check needs an `is_bye` short-circuit (see the `# Sean Update` note in
+  `models.py`).
 
 ---
 
@@ -98,6 +117,46 @@ strength-of-schedule (opponents' win %). Trade-off between **rewarding margins**
 **Prompt:** What happens if the algorithm changes from one round to the next?
 
 `engine.run_tournament` accepts a single function, a per-round sequence, or a
-round→function map (`run_pairing.py --schedule`). Hypotheses to test: e.g.
-`random` round 1 (no info) then `adjacent` later; or `fold` early to separate
-the field then `adjacent` to fine-tune. Record findings here.
+round→function map (`run_pairing.py --schedule`). A `Tournament` can also carry
+its own algorithm via `assign_algorithm`. Hypotheses to test: e.g. `random`
+round 1 (no info) then `adjacent` later; or `fold` early to separate the field
+then `adjacent` to fine-tune. Record findings here.
+
+---
+
+## D7. Draws vs. sudden death (NEW — raised by the model revision)
+
+**Prompt:** Should a match be allowed to end in a draw, or must it always have a
+winner?
+
+The original spec said: after two games, if agent totals are tied, play
+sudden-death agents "until the next agent is scored", so **a match never ends
+tied**. The revised model takes a different stance:
+
+- `Match` is defined as **exactly two games** (`is_valid` rejects more/fewer).
+- `is_draw` is true when the two games are **split 1-1** (each player wins one),
+  i.e. a draw is defined by *game split*, not by tied agent totals.
+- The result generators (`skilled_match`, `random_match`) still **append**
+  sudden-death `Game`s until agent totals differ — which produces matches with
+  3+ games and therefore *fails* the new two-game `is_valid` check.
+
+### Option A — Embrace draws (no sudden death)
+- **Pros:** Simpler match object (always two games); `is_draw` is meaningful;
+  matches a common "best-of-two, draws allowed" OP format.
+- **Cons:** Standings must define a draw's value (D4); pairing/record groups grow
+  a middle tier; diverges from the original written rule.
+
+### Option B — Keep sudden death (no draws)
+- **Pros:** Matches the original spec; standings stay win/loss only.
+- **Cons:** A match can have a variable number of games → relax `is_valid`
+  (e.g. `len(games) >= 2`); `is_draw` should be computed from tied agent totals
+  *before* sudden death, or removed.
+
+### Option C — Distinguish *game split* from *match draw*
+- Track a 1-1 **game split** separately from a true **agent tie**; a split that
+  is not an agent tie still has a match winner (more agents), and only an agent
+  tie triggers sudden death.
+
+**Status:** Open. Until resolved, `is_draw` semantics, the generators, and
+`Match.is_valid` disagree with each other. Whatever is chosen must be applied
+consistently across `models.py`, `generators.py`, `standings.py`, and `io.py`.

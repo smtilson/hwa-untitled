@@ -15,11 +15,26 @@ an **ordering of the players**. Walking that ordering two-at-a-time gives the
 pairing for round `n`, so an ordering and a pairing are the same thing. This
 project compares **families** of such functions.
 
-Match rules modeled here:
+Match rules modeled here (`tournament/models.py`):
 
-- A **game** is won by capturing 3 agents (agents-for/against are tracked).
-- A **match** is two games; ties broken by sudden-death agents (never tied).
-- A match result is reported as `agents_for-agents_against`, e.g. `5-4`.
+- A **`Game`** records the agents each side captured (`agents_a`, `agents_b`).
+  It is won by the player who reaches **3 agents** (`winner_is_a`).
+- A **`Match`** is **two games** between `player_a` and `player_b`. It derives
+  `total_agents_a` / `total_agents_b`, the per-game winners, `agent_score`, and
+  `is_draw` (true when the two games are split **1-1**). A **bye** is
+  `player_b == BYE`.
+- A player's **match result** is the dict `Match.results[player_id]` =
+  `{"id", "wins", "losses", "agents", "opponent"}`, where `wins`/`losses` are
+  **games won/lost** (0–2) and `agents` is total agents scored; the dict also
+  carries `is_draw` / `is_bye`.
+- A **`Round`** bundles matches and exposes `opponents()`, `player_results(pid)`,
+  and `overall_results`. A **`Tournament`** holds players, rounds, and an
+  assignable pairing algorithm (`assign_algorithm`).
+
+> **Note (in flux):** the model now permits **drawn matches** (1-1 game splits)
+> and validates a match as exactly two games. This differs from the original
+> "sudden-death, never tied" rule, and some downstream modules still reference
+> the older `Match` API. See `PLANNING.md` §5b and `docs/decisions.md` **D7**.
 
 ## Layout
 
@@ -27,6 +42,7 @@ Match rules modeled here:
 op_rules_study/
 ├── README.md              # this file
 ├── PLANNING.md            # study scope, goals, status
+├── CORRECTIONS.md         # inventory of created files + review notes
 ├── requirements.txt       # notebook/analysis deps (core sim is stdlib-only)
 ├── tournament/            # the model + algorithms (pure stdlib)
 │   ├── models.py          #   Player, Game, Match, Round, Tournament (dataclasses)
@@ -38,7 +54,8 @@ op_rules_study/
 │   └── io.py              #   CSV read/write
 ├── scripts/               # CLI entry points
 │   ├── generate_records.py
-│   └── run_pairing.py
+│   ├── run_pairing.py
+│   └── utils.py           #   validity decorator (check_validity)
 ├── notebooks/             # follow-along Jupyter analysis
 │   └── pairing_study.ipynb
 ├── data/                  # generated CSVs (see data/README.md)

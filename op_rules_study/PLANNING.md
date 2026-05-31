@@ -1,24 +1,51 @@
 # OP Rules Study — Planning Document
 
 A study of tournament **pairing algorithms** for Hubworld: Aidalon organized
-play. Status: **In Progress** (scaffolding complete).
+play. Status: **In Progress** — scaffold complete; data model under active
+revision (see §5b), with downstream modules pending re-sync.
 
 ## 1. The setup
 
-An organized-play event is a sequence of **rounds**. In each round players are
-**paired**; each pair plays one **match**.
+An organized-play event (`Tournament`) is a sequence of **rounds** (`Round`). In
+each round players are **paired**; each pair plays one **match** (`Match`). The
+data model lives in `tournament/models.py`.
 
-- A **game** is won by the first player to capture **3 agents**. We still record
-  how many agents each player captured.
-- A **match** is two games. After two games the players' total agents are
-  compared. If tied, sudden-death agents are played until one player leads, so
-  **a match never ends tied**.
-- A player's **match result** is reported as `agents_for-agents_against`
-  (e.g. `5-4`); more agents wins the match.
+- **`Game`** (frozen dataclass) records the agents each player captured in one
+  game: `agents_a`, `agents_b`. A game is won by the player who reaches **3
+  agents** (`AGENTS_TO_WIN`); `winner_is_a` is true when player A reached 3. A
+  game is *valid* (`is_valid`) when neither side exceeds 3 agents and the two
+  counts differ (someone actually won).
+- **`Match`** is **exactly two `Game`s** between `player_a` and `player_b` (by
+  id). `is_valid` requires two games and distinct players. A **bye** is encoded
+  as `player_b == BYE`. From the two games the match derives:
+  - `total_agents_a` / `total_agents_b` — agents summed across both games;
+  - `game_1_winner` / `game_2_winner`;
+  - `is_draw` — true when the two games are **split 1-1**;
+  - `agent_score` — the pair `(total_agents_a, total_agents_b)`.
+- A player's **match result** is a structured record, `Match.results[player_id]`:
+  `{"id", "wins", "losses", "agents", "opponent"}`, where `wins`/`losses` are
+  **games won/lost** (0–2) and `agents` is total agents scored. The `results`
+  dict also carries top-level `is_draw` and `is_bye` flags.
+- **`Round`** holds a `number` and a list of `matches`, exposes `opponents()`
+  (player → opponent map), `player_results(pid)` (that player's result dict for
+  the round), and `overall_results` (a round-level summary).
+- **`Tournament`** holds the `players`, the `rounds` played so far, and an
+  assignable pairing algorithm (`assign_algorithm` / `_algorithm`). Helpers:
+  `player_ids`, `player_by_id`, `past_opponents`.
+
+> **Change from the original spec (important).** The model now stores a match as
+> *exactly two games* and **allows a drawn match** (a 1-1 game split, surfaced as
+> `is_draw`). The original "play sudden-death agents until someone leads, so a
+> match never ends tied" rule is **not currently represented** in the
+> dataclasses. The result generators still *append* sudden-death games, which
+> conflicts with the two-game `is_valid` check. This tension is tracked in
+> `docs/decisions.md` **D7**.
 
 After rounds `1..n-1`, players are paired for round `n`. The **primary** key is
-record (`wins-losses`), which partitions players into **record groups**. The
-open question is how to **order within and across those groups** so players meet
+record, which partitions players into **record groups**. With the new per-player
+`results` shape the exact record definition (match wins vs. game wins vs. agent
+totals) is itself a scoring decision — see `docs/decisions.md` **D4**. The open
+question remains how to **order within and across those groups** so players meet
 opponents of comparable strength.
 
 ## 2. What the study does
@@ -54,21 +81,58 @@ opponents of comparable strength.
 
 ## 5. Components
 
+Status key: ☑ in place · ✎ revised, under active iteration · ⚠ needs re-sync to
+the revised model API.
+
 | Component | Location | Status |
 |---|---|---|
-| Tournament model (dataclasses) | `tournament/models.py` | ☑ |
-| Standings / records | `tournament/standings.py` | ☑ |
+| Tournament model (dataclasses) | `tournament/models.py` | ✎ revised (results dict, validity layer, draws, `assign_algorithm`) |
+| Validity decorator (`check_validity`) | `scripts/utils.py` | ⚠ broken import/decorator; needs fix |
+| Standings / records | `tournament/standings.py` | ⚠ uses old `Match` API (`agents_a/b`, `winner`) |
 | Pairing function families | `tournament/pairing.py` | ☑ |
-| Result generators | `tournament/generators.py` | ☑ |
-| Event engine (round loop, per-round swaps) | `tournament/engine.py` | ☑ |
-| Quality metrics | `tournament/metrics.py` | ☑ |
-| CSV I/O | `tournament/io.py` | ☑ |
+| Result generators | `tournament/generators.py` | ⚠ sudden-death loop uses old `agents_a/b` |
+| Event engine (round loop, per-round swaps) | `tournament/engine.py` | ☑ (depends on standings) |
+| Quality metrics | `tournament/metrics.py` | ☑ (depends on standings) |
+| CSV I/O | `tournament/io.py` | ⚠ writes old `Match` fields; CSV schema will change |
 | CLI scripts | `scripts/` | ☑ |
-| Notebook walkthrough | `notebooks/` | ☑ |
+| Tests | `tests/test_smoke.py` | ⚠ assert old `Match` API |
+| Notebook walkthrough | `notebooks/` | ⚠ uses old `Match` API |
 | Decision log (prompts + pros/cons) | `docs/decisions.md` | ☑ |
+
+## 5b. Recent changes
+
+**By Sean (model redesign):**
+- Reworked `Match`: renamed totals to `total_agents_a` / `total_agents_b`;
+  removed `winner` / `loser` / `agents_for()` / `agents_against()`; added
+  `game_1_winner`, `game_2_winner`, `is_draw`, `agent_score`, and a structured
+  per-player `results` dict (games won/lost + agents + opponent).
+- Added a **validity layer**: `is_valid` on `Game`/`Match`/`Round` plus a
+  `check_validity` decorator (`scripts/utils.py`).
+- `Round` gained `player_results` and `overall_results`.
+- `Tournament` can hold an assigned pairing algorithm (`assign_algorithm`).
+- Game win is now "reached exactly 3 agents"; matches may be **draws**.
+
+**By Cascade:**
+- Built the initial scaffold (model, standings, pairing, generators, engine,
+  metrics, io, scripts, notebook, docs).
+- Added an inventory (`CORRECTIONS.md`) and `# Sean Update:` review comments
+  flagging the downstream modules that still reference the old `Match` API and
+  the `scripts/utils.py` decorator bug.
+
+**Follow-ups needed (to make the package runnable again):**
+- Fix `scripts/utils.py` (`from functools import wraps`; rename inner function;
+  make the decorator property-aware) and relocate it so `models.py` can import
+  it without the failing `..scripts` relative import.
+- Re-sync `standings.py`, `generators.py`, `io.py`, `tests/`, and the notebook
+  to the new `Match` API / `results` shape.
+- Resolve the two-games-vs-sudden-death tension (D7).
 
 ## 6. Glossary
 
-- **Record group**: set of players with identical `wins-losses`.
+- **Record group**: set of players with the same record (definition is a scoring
+  choice — game wins-losses, match points, or agent totals; see D4).
 - **Ordering**: total order on players; pairing = consecutive pairs of it.
 - **Skill**: latent strength used only by generators; pairing never sees it.
+- **Draw (`is_draw`)**: a match whose two games are split 1-1 (each player wins
+  one game). Newly representable in the model.
+- **Bye (`BYE`)**: a player without an opponent in a round (`player_b == BYE`).
