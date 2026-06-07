@@ -21,7 +21,9 @@ from .standings import compute_records
 MatchModel = Callable[[Player, Player, Random], Match]
 
 # Round 1 has no records, so we need a way to seed the first pairing.
-PairingSpec = Union[PairingFunction, Sequence[PairingFunction], Mapping[int, PairingFunction]]
+PairingSpec = Union[
+    PairingFunction, Sequence[PairingFunction], Mapping[int, PairingFunction]
+]
 
 
 def _pairing_for_round(spec: PairingSpec, round_number: int) -> PairingFunction:
@@ -63,6 +65,7 @@ def run_tournament(
 
         rnd = Round(number=n)
         for a, b in pairs:
+            # Sean remove byes
             if b == BYE:
                 rnd.matches.append(Match(player_a=a, player_b=BYE))
             else:

@@ -16,16 +16,22 @@ data model lives in `tournament/models.py`.
   game is *valid* (`is_valid`) when neither side exceeds 3 agents and the two
   counts differ (someone actually won).
 - **`Match`** is **exactly two `Game`s** between `player_a` and `player_b` (by
-  id). `is_valid` requires two games and distinct players. A **bye** is encoded
-  as `player_b == BYE`. From the two games the match derives:
+  id). `is_valid` requires two games and distinct players. (Byes and the `BYE`
+  sentinel have been **removed** from the model; tournaments now require an even
+  number of players.) The match outcome is decided by the **games** — a win, a
+  loss, or a **split** — read from `game_1_winner` / `game_2_winner`. Agent totals
+  do **not** decide the match; they are surfaced for **downstream** use by the
+  pairing/standings code (as tiebreakers/metrics). From the two games the match
+  derives:
   - `total_agents_a` / `total_agents_b` — agents summed across both games;
-  - `game_1_winner` / `game_2_winner`;
-  - `is_draw` — true when the two games are **split 1-1**;
+  - `game_1_winner` / `game_2_winner` — the winning player id of each game;
+  - `is_draw` — true when the two games are **split 1-1** (each player wins one);
   - `agent_score` — the pair `(total_agents_a, total_agents_b)`.
 - A player's **match result** is a structured record, `Match.results[player_id]`:
-  `{"id", "wins", "losses", "agents", "opponent"}`, where `wins`/`losses` are
-  **games won/lost** (0–2) and `agents` is total agents scored. The `results`
-  dict also carries top-level `is_draw` and `is_bye` flags.
+  `{"id", "wins", "losses", "player_agents", "opponent_agents", "opponent"}`, where
+  `wins`/`losses` are **games won/lost** (0–2), `player_agents` is the agents this
+  player scored across the match and `opponent_agents` is the opponent's. The
+  `results` dict also carries a top-level `is_draw` flag.
 - **`Round`** holds a `number` and a list of `matches`, exposes `opponents()`
   (player → opponent map), `player_results(pid)` (that player's result dict for
   the round), and `overall_results` (a round-level summary).
@@ -77,7 +83,7 @@ opponents of comparable strength.
 - How to generate results: random vs. skill-based (Bradley-Terry) vs. empirical.
 - Round-by-round simulation vs. whole-tournament pre-generation.
 - Scoring system (match points, agent differential, strength-of-schedule).
-- Rematch avoidance policy and bye assignment.
+- Rematch avoidance policy (bye assignment removed — even fields required).
 
 ## 5. Components
 
@@ -105,12 +111,18 @@ the revised model API.
 - Reworked `Match`: renamed totals to `total_agents_a` / `total_agents_b`;
   removed `winner` / `loser` / `agents_for()` / `agents_against()`; added
   `game_1_winner`, `game_2_winner`, `is_draw`, `agent_score`, and a structured
-  per-player `results` dict (games won/lost + agents + opponent).
+  per-player `results` dict (games won/lost, `player_agents` / `opponent_agents`,
+  opponent).
 - Added a **validity layer**: `is_valid` on `Game`/`Match`/`Round` plus a
   `check_validity` decorator (`scripts/utils.py`).
 - `Round` gained `player_results` and `overall_results`.
 - `Tournament` can hold an assigned pairing algorithm (`assign_algorithm`).
 - Game win is now "reached exactly 3 agents"; matches may be **draws**.
+- **Removed byes**: deleted the `BYE` sentinel and all bye handling from
+  `models.py` (the `is_valid` short-circuit, `is_bye`, `results["is_bye"]`, and
+  the `opponents()` / `past_opponents` bye filters). Tournaments now assume an
+  **even number of players**; downstream modules still referencing `BYE` need
+  re-sync (`pairing`, `engine`, `standings`, `io`, `__init__`, tests).
 
 **By Cascade:**
 - Built the initial scaffold (model, standings, pairing, generators, engine,
@@ -135,4 +147,5 @@ the revised model API.
 - **Skill**: latent strength used only by generators; pairing never sees it.
 - **Draw (`is_draw`)**: a match whose two games are split 1-1 (each player wins
   one game). Newly representable in the model.
-- **Bye (`BYE`)**: a player without an opponent in a round (`player_b == BYE`).
+- **Bye (`BYE`)**: *removed.* Byes are no longer modeled; tournaments require an
+  even number of players.

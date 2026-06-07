@@ -5,6 +5,8 @@ let the final standings reflect true skill. These metrics quantify that against
 the latent ``skill`` we know in simulation (but which the algorithms never see).
 """
 
+# Windsurf: I am currently agnostic about how I want to evaluate the different pairing algorithms
+
 from __future__ import annotations
 
 from statistics import fmean, pstdev
@@ -21,6 +23,7 @@ def mean_skill_gap(tournament: Tournament) -> float:
     by_id = {p.pid: p for p in tournament.players}
     for rnd in tournament.rounds:
         for m in rnd.matches:
+            # Sean remove byes
             if m.is_bye:
                 continue
             gaps.append(abs(by_id[m.player_a].skill - by_id[m.player_b].skill))

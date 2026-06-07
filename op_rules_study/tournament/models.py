@@ -10,11 +10,16 @@ Domain recap
 ------------
 * A **game** is won by the first player to capture ``AGENTS_TO_WIN`` (3) agents.
   We still record how many agents *each* player captured in that game.
-* A **match** is a best-of-two-games affair. After two games the players'
-  agent totals are compared. If those totals are tied, play continues
-  (sudden-death agents) until someone is ahead -- so a match never ends tied.
-* A player's **match result** is reported as ``((wins,losses),(agents_for,agents_against))``
-  (e.g. ``5-4``). This is the output for computing the next round of the tournament.
+* A **match** is two games. Its outcome is decided by the **games**
+  (``game_1_winner`` / ``game_2_winner``): a win, a loss, or a 1-1 **split**
+  (``is_draw``). The per-player agent totals (``player_agents`` /
+  ``opponent_agents`` in ``results``; ``total_agents_a`` / ``total_agents_b`` /
+  ``agent_score`` on the match) do **not** decide the match -- they are surfaced
+  for the pairing/standings code to use as tiebreakers/metrics.
+* A player's **match result** is reported as the dict ``Match.results[pid]`` =
+  ``{"id", "wins", "losses", "player_agents", "opponent_agents", "opponent"}``
+  (``wins``/``losses`` are games won/lost, 0-2). This is the summary used to
+  compute the next round of the tournament.
 """
 
 from __future__ import annotations
@@ -34,17 +39,12 @@ from .utils import check_validity
 # Number of agents a player must capture to win a single game.
 AGENTS_TO_WIN: int = 3
 
-# Sentinel player id used for a bye (odd number of players in a round).
-# TODO: Windsurf: Add flag to disable byes
-# Cascade reply: This constant isn't the right place for that flag -- byes are
-# *created* in pairing (`_pair_sequence` appends `(odd_id, BYE)`) and consumed in
-# `engine.run_tournament`. A "no byes" option is really a policy choice that lives
-# there. Note: with an odd field you cannot avoid a bye without leaving someone
-# unpaired, so "disable byes" likely means one of: (a) require even fields, (b)
-# drop the odd player out for that round, or (c) use a fill/ghost player. Worth
-# deciding which you mean (a decisions.md entry) before wiring a flag through
-# engine/pairing.
-BYE: int = -1
+# Windsurf: For the time being, let us just force the number of players to be even.
+# TODO(Sean): Byes and the `BYE` sentinel were removed from the model. Follow up to
+# check the downstream effects of this change -- `pairing._pair_sequence`,
+# `engine.run_tournament`, `standings.compute_records`, `io.write_matches` /
+# `read_matches`, and `tournament/__init__` still import/reference `BYE`, and the
+# tests assume bye handling. These break until updated to require an even field.
 
 
 # Windsurf: I want a version of this class where skill can be an ignored trait.
@@ -56,6 +56,7 @@ BYE: int = -1
 # a generator/tournament-level switch "use_skill" rather than a second class --
 # subclassing a frozen, slotted dataclass is awkward and would duplicate logic.
 # A separate class is usually overkill versus an optional field + a flag.
+# Windsurf: I definitely didn't mean to use a separate class. I meant add flags in the relevant functions.
 @dataclass(slots=True, frozen=True)
 class Player:
     """A competitor.
@@ -84,11 +85,8 @@ class Game:
     agents_a: int
     agents_b: int
 
-    # Sean Update: Annotate as `-> tuple[bool, str]`; you return (validity,
-    # error_msg), not a bool. `Match.is_valid` and `Round.is_valid` should use
-    # the same return type for consistency.
     @property
-    def is_valid(self) -> bool:
+    def is_valid(self) -> tuple[bool, str]:
         validity = True
         error_msg = ""
         if self.agents_a > AGENTS_TO_WIN:
@@ -102,10 +100,6 @@ class Game:
             error_msg += "Both players have the same number of agents."
         return validity, error_msg
 
-    # Sean Update: Decorator order fixed -- `@property` is now outermost so it
-    # wraps the validity-checked function (Cascade swapped these on request).
-    # NB: `check_validity` in scripts/utils.py is still broken (bad import / name
-    # shadow), so the check won't actually run until that is fixed.
     @property
     @check_validity
     def winner_is_a(self) -> bool:
@@ -114,21 +108,15 @@ class Game:
 
 @dataclass(slots=True)
 class Match:
-    """A match between ``player_a`` and ``player_b`` (by id).
-
-    A bye is encoded as ``player_b == BYE`` with no games played.
-    """
+    """A match between ``player_a`` and ``player_b`` (by id)."""
 
     player_a: int
     player_b: int
     games: list[Game] = field(default_factory=list)
+    _results: dict | None = field(default=None, init=False, repr=False)
 
-    # Sean Update: A bye match legitimately has 0 games (player_b == BYE), yet
-    # this marks every bye as invalid. Guard with `if self.is_bye: return True, ""`
-    # first. Consider also validating that agent totals are not tied (your rules
-    # forbid a drawn match via sudden death).
     @property
-    def is_valid(self):
+    def is_valid(self) -> tuple[bool, str]:
         valid = True
         error_msg = ""
         if len(self.games) != 2:
@@ -137,12 +125,10 @@ class Match:
         if self.player_a == self.player_b:
             valid = False
             error_msg += "Match players are the same.\n"
+        if self.total_agents_a == self.total_agents_b:
+            valid = False
+            error_msg += "Total agents are the same.\n"
         return valid, error_msg
-
-    @property
-    @check_validity
-    def is_bye(self) -> bool:
-        return self.player_b == BYE
 
     @property
     def total_agents_a(self) -> int:
@@ -166,6 +152,7 @@ class Match:
     # true draw when the AGENT TOTALS tie (and your rules then force sudden death
     # so it shouldn't persist). Rename to `is_split`, or compute from
     # `self.total_agents_a == self.total_agents_b`. (Decorator order now fixed.)
+    # Windsurf: This is false. The agent totals aren't actually determining the winner of the match, they will be used in other parts of the pairing algorithm. Please make sure to correct this in the readme, planning documents, and anywhere else as this is a key point.
     @property
     @check_validity
     def is_draw(self):
@@ -182,27 +169,34 @@ class Match:
     # init=False, repr=False)`, drop `slots=True` for Match, or use
     # `functools.cached_property`. (Same problem hits `Round._overall_results`.)
     def _compute_results(self) -> dict:
+        # Cascade: added "opponent_agents" to each player's entry so the per-player
+        # result dict is self-contained (agents-for AND agents-against). This lets
+        # standings.Record consume Round.player_results directly.
         self._results = {
             self.player_a: {
                 "id": self.player_a,
                 "wins": 0,
                 "losses": 0,
-                "agents": 0,
+                "player_agents": 0,
+                "opponent_agents": 0,
                 "opponent": self.player_b,
             },
             self.player_b: {
                 "id": self.player_b,
                 "wins": 0,
                 "losses": 0,
-                "agents": 0,
+                "player_agents": 0,
+                "opponent_agents": 0,
                 "opponent": self.player_a,
             },
             "is_draw": self.is_draw,
-            "is_bye": self.is_bye,
         }
         for game in self.games:
-            self._results[self.player_a]["agents"] += game.agents_a
-            self._results[self.player_b]["agents"] += game.agents_b
+            self._results[self.player_a]["player_agents"] += game.agents_a
+            self._results[self.player_b]["player_agents"] += game.agents_b
+            # Cascade: each player's agents-against is the opponent's agents.
+            self._results[self.player_a]["opponent_agents"] += game.agents_b
+            self._results[self.player_b]["opponent_agents"] += game.agents_a
             if game.winner_is_a:
                 self._results[self.player_a]["wins"] += 1
                 self._results[self.player_b]["losses"] += 1
@@ -214,7 +208,7 @@ class Match:
     @property
     @check_validity
     def results(self) -> dict:
-        if not hasattr(self, "_results"):
+        if self._results is None:
             self._compute_results()
         return self._results
 
@@ -225,6 +219,7 @@ class Round:
 
     number: int
     matches: list[Match] = field(default_factory=list)
+    _overall_results: dict | None = field(default=None, init=False, repr=False)
 
     @property
     def is_valid(self) -> bool:
@@ -245,8 +240,6 @@ class Round:
         table: dict[int, int] = {}
         for m in self.matches:
             table[m.player_a] = m.player_b
-            if not m.is_bye:
-                table[m.player_b] = m.player_a
         return table
 
     def player_results(self, player_id: int) -> dict:
@@ -262,20 +255,15 @@ class Round:
         results = match.results[player_id]
         return results
 
-    # Sean Update: Re "what is a good pattern?" -- you currently have two
-    # near-duplicate builders (`_compute_overall_results` and
-    # `_calculate_overall_results`) plus the slots/caching bug. Suggested pattern:
-    # keep ONE pure builder that returns a single agreed shape -- either a list of
-    # per-match `match.results`, or a flat {player_id: result} map (NOT mapping
-    # both players to the same `match.results` dict like the version below does).
-    # Expose it once via `functools.cached_property`, delete the unused twin, and
-    # reuse that shape in standings/io so there is a single source of truth.
-    # TODO: I don't like this solution so far. I want something else here. What is a good pattern for that?
     def _compute_overall_results(self) -> dict:
         self._overall_results = {"round": self.number, "matches": {}}
         for match in self.matches:
-            self._overall_results["matches"][match.player_a] = match.results
-            self._overall_results["matches"][match.player_b] = match.results
+            self._overall_results["matches"][match.player_a] = match.results[
+                match.player_a
+            ]
+            self._overall_results["matches"][match.player_b] = match.results[
+                match.player_b
+            ]
         return self._overall_results
 
     @property
@@ -284,18 +272,9 @@ class Round:
         """
         Returns a dictionary with the overall results of the round.
         """
-        if not hasattr(self, "_overall_results"):
+        if self._overall_results is None:
             self._overall_results = self._compute_overall_results()
         return self._overall_results
-
-    def _calculate_overall_results(self) -> dict:
-        """
-        Calculates the overall results of the round.
-        """
-        return {
-            "round": self.number,
-            "matches": [match.results for match in self.matches],
-        }
 
 
 @dataclass(slots=True)
@@ -319,18 +298,11 @@ class Tournament:
                 return p
         return None
 
-    # Windsurf: I am not sure if this is relevant
-    # Cascade reply: It is relevant -- `engine.run_tournament` calls this to build
-    # `PairingContext.past_opponents`, which `pairing._avoid_rematches` uses to
-    # stop players from being paired against someone they already faced. If you
-    # decide rematch avoidance is out of scope for the study, you could drop it;
-    # otherwise keep it. (Caveat: it calls `Round.opponents()`, which is decorated
-    # with `check_validity`, so it depends on the validity layer being fixed.)
     def past_opponents(self, pid: int) -> set[int]:
-        """All opponents a player has already faced (excludes byes)."""
+        """All opponents a player has already faced."""
         seen: set[int] = set()
         for rnd in self.rounds:
             opp = rnd.opponents().get(pid)
-            if opp is not None and opp != BYE:
+            if opp is not None:
                 seen.add(opp)
         return seen

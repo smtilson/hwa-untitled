@@ -28,7 +28,6 @@ from .metrics import summary
 
 __all__ = [
     "AGENTS_TO_WIN",
-    "BYE",
     "Game",
     "Match",
     "Player",
@@ -45,7 +44,7 @@ __all__ = [
     "make_players",
     "random_match",
     "skilled_match",
-    "win_probability",
+    "score_agent_probability",
     "run_tournament",
     "summary",
 ]

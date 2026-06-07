@@ -26,6 +26,7 @@ MATCH_FIELDS = [
     "winner",
     "result_a",
     "result_b",
+    # Sean remove byes
     "is_bye",
 ]
 STANDINGS_FIELDS = [
@@ -66,6 +67,7 @@ def write_matches(tournament: Tournament, path: str | Path) -> None:
                         "winner": m.winner,
                         "result_a": f"{m.agents_a}-{m.agents_b}",
                         "result_b": f"{m.agents_b}-{m.agents_a}",
+                        # Sean remove byes
                         "is_bye": int(m.is_bye),
                     }
                 )
@@ -133,6 +135,7 @@ def read_matches(path: str | Path, players: list[Player]) -> Tournament:
         for row in csv.DictReader(f):
             n = int(row["round"])
             rnd = rounds.setdefault(n, Round(number=n))
+            # Sean remove byes
             if int(row["is_bye"]):
                 rnd.matches.append(Match(player_a=int(row["player_a"]), player_b=BYE))
             else:

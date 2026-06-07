@@ -53,9 +53,6 @@ def test_each_player_plays_once_per_round():
         for m in rnd.matches:
             assert m.player_a not in seen
             seen.add(m.player_a)
-            if not m.is_bye:
-                assert m.player_b not in seen
-                seen.add(m.player_b)
         assert len([p for p in players if p.pid in seen]) == len(players)
 
 

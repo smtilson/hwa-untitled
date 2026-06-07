@@ -10,7 +10,8 @@ Scoring is configurable so the study can compare, e.g., "match wins only" vs.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Callable
 
 from .models import BYE, Tournament
 
@@ -20,29 +21,71 @@ class Record:
     """A player's cumulative record across the rounds considered so far."""
 
     pid: int
-    match_wins: int = 0
-    match_losses: int = 0
+    wins: int = 0
+    losses: int = 0
+    tie_breaks_won: int = 0
     agents_for: int = 0
     agents_against: int = 0
+    # Sean remove byes
     byes: int = 0
+    _raw_results: list[dict[str, int]] = field(default_factory=list)
+    _agent_seq: list[tuple[int, int]] = field(default_factory=list)
 
     @property
     def matches_played(self) -> int:
-        return self.match_wins + self.match_losses
+        return (self.wins + self.losses) // 2
 
     @property
     def agent_diff(self) -> int:
         return self.agents_for - self.agents_against
 
     @property
-    def match_points(self) -> int:
-        """Simple 3-points-per-win scheme (no draws are possible)."""
-        return 3 * self.match_wins
+    def agent_ratio(self) -> float:
+        if self.agents_against + self.agents_for == 0:
+            return 0.0
+        return self.agents_for / (self.agents_against + self.agents_for)
 
     @property
     def record_str(self) -> str:
         """Human-readable ``wins-losses`` label used to form record groups."""
-        return f"{self.match_wins}-{self.match_losses}"
+        return f"{self.wins}-{self.losses}, {self.agent_ratio:.3f}, {self.agent_diff}"
+
+    @property
+    def agent_seq(self) -> list[tuple[int, int]]:
+        # Cascade: implemented -- build the (agents_for, agents_against) sequence
+        # lazily from the stored per-round result dicts.
+        if not self._agent_seq:
+            self._agent_seq = [
+                (r["player_agents"], r["opponent_agents"]) for r in self._raw_results
+            ]
+        return self._agent_seq
+
+    def agent_score(self, metric: Callable) -> float:
+        # Cascade: added -- score the agent sequence with a pluggable metric.
+        return metric(self.agent_seq)
+
+    def process_result(self, result: dict[str, int]) -> None:
+        # Cascade: rewritten -- now consumes the per-player dict returned by
+        # Round.player_results / Match.results[pid]:
+        #   {"id", "wins", "losses", "player_agents", "opponent_agents", "opponent"}.
+        self.wins += result["wins"]
+        self.losses += result["losses"]
+        self.agents_for += result["player_agents"]
+        self.agents_against += result["opponent_agents"]
+        self._raw_results.append(result)
+        # Invalidate the cached agent sequence so it is rebuilt on next access.
+        self._agent_seq = []
+
+    @classmethod
+    def from_raw_results(cls, raw_results: list[dict[str, int]]) -> "Record":
+        # Cascade: implemented -- rebuild a Record from a list of per-player
+        # result dicts (all sharing the same "id").
+        if not raw_results:
+            raise ValueError("from_raw_results requires at least one result")
+        record = cls(pid=raw_results[0]["id"])
+        for result in raw_results:
+            record.process_result(result)
+        return record
 
 
 def compute_records(
@@ -65,43 +108,45 @@ def compute_records(
         if through_round is not None and rnd.number > through_round:
             continue
         for m in rnd.matches:
-            if m.is_bye:
+            # Sean remove byes
+            # Cascade: check the BYE sentinel directly rather than `m.is_bye`,
+            # which is validity-checked and would raise on a 0-game bye match.
+            if m.player_b == BYE:
+                # Cascade: rewritten for the new result-dict shape. A bye is
+                # scored as a 2-0 win: two game wins, two agents-for, none against.
                 rec = records[m.player_a]
-                rec.match_wins += 1
                 rec.byes += 1
-                # A bye is conventionally scored as a 2-0 win in agents.
-                rec.agents_for += 2
+                rec.process_result(
+                    {
+                        "id": m.player_a,
+                        "wins": 2,
+                        "losses": 0,
+                        "player_agents": 2,
+                        "opponent_agents": 0,
+                        "opponent": BYE,
+                    }
+                )
                 continue
 
-            # Sean Update: `Match` no longer exposes `agents_a`/`agents_b`/`winner`
-            # (renamed to `total_agents_a`/`total_agents_b`; `winner` removed), so
-            # this block now raises AttributeError. Switch to `m.total_agents_a` /
-            # `m.total_agents_b`, and derive the winner from `m.results` (or re-add
-            # a `winner` helper on Match). This whole function is unusable until then.
-            a, b = records[m.player_a], records[m.player_b]
-            a.agents_for += m.agents_a
-            a.agents_against += m.agents_b
-            b.agents_for += m.agents_b
-            b.agents_against += m.agents_a
-
-            if m.winner == m.player_a:
-                a.match_wins += 1
-                b.match_losses += 1
-            else:
-                b.match_wins += 1
-                a.match_losses += 1
+            # Cascade: rewritten -- feed each player their per-player result dict
+            # from Match.results (which now includes "opponent_agents").
+            results = m.results
+            records[m.player_a].process_result(results[m.player_a])
+            records[m.player_b].process_result(results[m.player_b])
 
     return records
 
 
-def rank_key(record: Record) -> tuple[int, int, int]:
-    """Default sort key: match points, then agent differential, then agents-for.
+def rank_key(record: Record) -> tuple[int, float, int]:
+    """Default sort key: game wins, then agent ratio, then agent differential.
 
     Returns a tuple suitable for ``sorted(..., reverse=True)`` (higher is
     better). Swap this out to experiment with alternative tiebreakers.
     """
 
-    return (record.match_points, record.agent_diff, record.agents_for)
+    # Cascade: updated -- `match_points` was removed; rank by wins, then the
+    # agent ratio, then the agent differential.
+    return (record.wins, record.agent_ratio, record.agent_diff)
 
 
 def group_by_record(records: dict[int, Record]) -> dict[str, list[int]]:

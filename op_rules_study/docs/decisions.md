@@ -98,6 +98,11 @@ play** (running up agents), plus the new question of **how much a draw is worth*
 
 ## D5. Rematch avoidance & byes
 
+<!-- Sean Bye comment -->
+> **Byes removed.** The `BYE` sentinel and all bye handling were removed from
+> `models.py`; tournaments now require an even number of players. The bye bullets
+> below are obsolete and need reworking.
+
 - Rematch avoidance is **greedy/best-effort** (`pairing._avoid_rematches`). A
   perfect constraint solve (max-weight matching) is possible but heavier and
   harder for players to follow. Worth studying how often greedy fails.

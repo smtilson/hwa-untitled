@@ -61,6 +61,7 @@ def _pair_sequence(order: list[int]) -> list[Pairing]:
     pairs: list[Pairing] = []
     it = iter(order)
     for a in it:
+        # Sean remove byes
         b = next(it, BYE)
         pairs.append((a, b))
     return pairs
@@ -131,10 +132,14 @@ def make_record_group_pairing(strategy: str = "adjacent") -> PairingFunction:
     using ``strategy``, then pairs adjacent players across the flattened order.
     """
     if strategy not in _WITHIN_GROUP:
-        raise ValueError(f"unknown strategy {strategy!r}; choose from {list(_WITHIN_GROUP)}")
+        raise ValueError(
+            f"unknown strategy {strategy!r}; choose from {list(_WITHIN_GROUP)}"
+        )
     within = _WITHIN_GROUP[strategy]
 
-    def _fn(records: dict[int, Record], rng: Random, ctx: PairingContext) -> list[Pairing]:
+    def _fn(
+        records: dict[int, Record], rng: Random, ctx: PairingContext
+    ) -> list[Pairing]:
         groups = group_by_record(records)
         order: list[int] = []
         for _label, pids in groups.items():
@@ -146,7 +151,9 @@ def make_record_group_pairing(strategy: str = "adjacent") -> PairingFunction:
     return _fn
 
 
-def random_pairing(records: dict[int, Record], rng: Random, ctx: PairingContext) -> list[Pairing]:
+def random_pairing(
+    records: dict[int, Record], rng: Random, ctx: PairingContext
+) -> list[Pairing]:
     """Control group: ignore records entirely and pair at random."""
     order = list(records.keys())
     rng.shuffle(order)

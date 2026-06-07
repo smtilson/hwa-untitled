@@ -16,9 +16,9 @@ export default function Tracker({
   className,
 }: TrackerProps) {
   return (
-    <div className={cn('flex flex-col items-center gap-2 w-80', className)}>
-      {/* blech: VALUE BOX dimensions (w-72, h-20) and colors (border-gray-400, bg-white, dark:bg-gray-800, dark:border-gray-600) */}
-      <div className="rounded-md border border-gray-400 bg-white dark:bg-gray-800 dark:border-gray-600 w-40 h-20 flex items-center justify-center gap-3 text-center">
+    <div className={cn('flex flex-col items-center gap-2 w-full max-w-xs', className)}>
+      {/* blech: VALUE BOX dimensions (w-40, h-20) and colors (border-gray-400, bg-white, dark:bg-gray-800, dark:border-gray-600) */}
+      <div className="rounded-md border border-gray-400 bg-white dark:bg-gray-800 dark:border-gray-600 w-full max-w-56 h-20 flex items-center justify-center gap-3 text-center">
         {/* blech: LABEL & VALUE TEXT size (text-lg) and color (text-gray-900, dark:text-white) */}
         <span className="text-lg text-gray-900 dark:text-white">{label}</span>
         <span className="text-lg text-gray-900 dark:text-white">{value}</span>

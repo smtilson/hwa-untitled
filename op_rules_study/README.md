@@ -19,14 +19,18 @@ Match rules modeled here (`tournament/models.py`):
 
 - A **`Game`** records the agents each side captured (`agents_a`, `agents_b`).
   It is won by the player who reaches **3 agents** (`winner_is_a`).
-- A **`Match`** is **two games** between `player_a` and `player_b`. It derives
-  `total_agents_a` / `total_agents_b`, the per-game winners, `agent_score`, and
-  `is_draw` (true when the two games are split **1-1**). A **bye** is
-  `player_b == BYE`.
+- A **`Match`** is **two games** between `player_a` and `player_b`. The outcome is
+  decided by the **games** (`game_1_winner` / `game_2_winner`); `is_draw` is a 1-1
+  game split. It also derives `total_agents_a` / `total_agents_b` and `agent_score`,
+  but **agent totals do not decide the match** — they are surfaced for downstream
+  pairing/standings use (tiebreakers/metrics).
+  <!-- Sean Bye comment --> (Byes and the `BYE` sentinel have been removed from
+  the model; tournaments now require an even number of players.)
 - A player's **match result** is the dict `Match.results[player_id]` =
-  `{"id", "wins", "losses", "agents", "opponent"}`, where `wins`/`losses` are
-  **games won/lost** (0–2) and `agents` is total agents scored; the dict also
-  carries `is_draw` / `is_bye`.
+  `{"id", "wins", "losses", "player_agents", "opponent_agents", "opponent"}`, where
+  `wins`/`losses` are **games won/lost** (0–2), `player_agents` is this player's
+  agent total and `opponent_agents` the opponent's; the dict also carries `is_draw`.
+  <!-- Sean Bye comment --> (`is_bye` removed.)
 - A **`Round`** bundles matches and exposes `opponents()`, `player_results(pid)`,
   and `overall_results`. A **`Tournament`** holds players, rounds, and an
   assignable pairing algorithm (`assign_algorithm`).

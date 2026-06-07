@@ -18,8 +18,10 @@ scripts. Nothing here is hand-edited.
 
 > **Schema change pending.** The columns above reflect the *original* `Match`
 > API. The revised model (`tournament/models.py`) reports each match as a
-> per-player `results` dict (`wins`/`losses` = games won/lost 0–2, `agents` =
-> total agents, plus `opponent`, `is_draw`, `is_bye`) and renamed totals to
+> per-player `results` dict (`wins`/`losses` = games won/lost 0–2,
+> `player_agents` / `opponent_agents` = this player's vs. the opponent's agent
+> totals, plus `opponent`, `is_draw`) and renamed totals to
+> <!-- Sean Bye comment --> (`is_bye` removed; the `is_bye` match column should be dropped.)
 > `total_agents_a` / `total_agents_b`. `tournament/io.py` has **not** been
 > re-synced yet, so the match CSV will gain game-record and draw columns once it
 > is. See `PLANNING.md` §5b and `docs/decisions.md` D4/D7.
