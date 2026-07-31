@@ -1,7 +1,9 @@
-from log_utils import log_call
+from card_scraper.logging_utils import log_call
+import csv
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 # CHANGES:
 #  - Document the normalization rules in the docstring:
@@ -34,3 +36,20 @@ def convert_back(filename):
         else:
             new_name += " " + word.capitalize()
     return new_name
+
+
+@log_call(logger=logger)
+def csv_to_tsv(csv_path="hubworld_aidalon.csv", tsv_path="hubworld_aidalon.tsv"):
+    """Convert a CSV file to a tab-separated TSV file.
+
+    Defaults to the project's standard CSV output path.
+    """
+    with open(csv_path, "r", newline="", encoding="utf-8") as csvfile, open(
+        tsv_path, "w", newline="", encoding="utf-8"
+    ) as tsvfile:
+        reader = csv.reader(csvfile)
+        writer = csv.writer(tsvfile, delimiter="\t")
+        for row in reader:
+            writer.writerow(row)
+
+    print(f"Converted {csv_path} to {tsv_path}")

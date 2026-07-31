@@ -23,7 +23,9 @@ Match rules modeled here (`tournament/models.py`):
   decided by the **games** (`game_1_winner` / `game_2_winner`); `is_draw` is a 1-1
   game split. It also derives `total_agents_a` / `total_agents_b` and `agent_score`,
   but **agent totals do not decide the match** — they are surfaced for downstream
-  pairing/standings use (tiebreakers/metrics).
+  pairing/standings use (tiebreakers/metrics). A tied agent score is broken by a
+  **bonus agent** (`bonus_agents_a` / `bonus_agents_b`, a constructor arg set by
+  the result generator), folded into the agent totals without changing the winner.
   <!-- Sean Bye comment --> (Byes and the `BYE` sentinel have been removed from
   the model; tournaments now require an even number of players.)
 - A player's **match result** is the dict `Match.results[player_id]` =
@@ -35,10 +37,10 @@ Match rules modeled here (`tournament/models.py`):
   and `overall_results`. A **`Tournament`** holds players, rounds, and an
   assignable pairing algorithm (`assign_algorithm`).
 
-> **Note (in flux):** the model now permits **drawn matches** (1-1 game splits)
-> and validates a match as exactly two games. This differs from the original
-> "sudden-death, never tied" rule, and some downstream modules still reference
-> the older `Match` API. See `PLANNING.md` §5b and `docs/decisions.md` **D7**.
+> **Note:** the model permits **drawn matches** (1-1 game splits) and validates a
+> match as exactly two games. This differs from the original "sudden-death, never
+> tied" rule; a tied agent score is instead broken by a bonus agent (no third
+> game). See `PLANNING.md` §5b and `docs/decisions.md` **D7**.
 
 ## Layout
 
@@ -55,13 +57,24 @@ op_rules_study/
 │   ├── generators.py      #   result models (skill-based / random)
 │   ├── engine.py          #   round-by-round event loop (per-round swaps)
 │   ├── metrics.py         #   quality metrics for comparing algorithms
+│   ├── presentation.py    #   display functions for tournament results
+│   ├── rating.py          #   rating functions for player performance
 │   └── io.py              #   CSV read/write
 ├── scripts/               # CLI entry points
 │   ├── generate_records.py
 │   ├── run_pairing.py
 │   └── utils.py           #   validity decorator (check_validity)
 ├── notebooks/             # follow-along Jupyter analysis
-│   └── pairing_study.ipynb
+│   ├── pairing_study.ipynb
+│   ├── presentation_demo.ipynb
+│   └── reference/         # one notebook per tournament module
+│       ├── 1_models.ipynb
+│       ├── 2_generators.ipynb
+│       ├── 3_standings.ipynb
+│       ├── 4_pairing.ipynb
+│       ├── 5_engine.ipynb
+│       ├── 6_rating.ipynb
+│       └── 7_metrics.ipynb
 ├── data/                  # generated CSVs (see data/README.md)
 ├── tests/                 # sanity tests
 └── docs/
@@ -105,19 +118,32 @@ jupyter notebook notebooks/pairing_study.ipynb
 
 ```python
 from random import Random
-from tournament import make_players, run_tournament, get_pairing, summary
+from tournament import (
+    make_players,
+    run_tournament,
+    get_pairing,
+    summary,
+    display_tournament_summary,
+    display_metrics,
+)
 
 rng = Random(0)
 players = make_players(32, rng)
 tour = run_tournament(players, n_rounds=5, pairing=get_pairing("fold"), rng=rng)
-print(summary(tour))
+print(display_tournament_summary(tour))
+print(display_metrics(tour))
 ```
 
 ## Available pairing algorithms
 
-`adjacent`, `fold`, `slide`, `random_within_record`, `random`
+`adjacent`, `fold`, `strong_weak`, `random_within_record`, `random`
 (see [`tournament/pairing.py`](tournament/pairing.py) and
 [`docs/decisions.md`](docs/decisions.md) for the trade-offs).
+
+Each record-based algorithm first partitions players by their win-loss record,
+orders the players inside each bracket, and then balances odd-sized brackets via
+`standings.make_groups_even` (so every bracket contains an even number of players
+before pairings are formed).
 
 ## Metrics
 
@@ -126,6 +152,29 @@ print(summary(tour))
 - **standings_skill_correlation** — rank correlation of final standings vs. true
   skill (higher = standings recover strength better).
 - **rematch_count** — number of repeated pairings (lower = better).
+
+## Presentation module
+
+The `tournament/presentation.py` module provides display functions for visualizing tournament results:
+
+- **`display_round`** — Shows detailed information for a specific round, including pairings, skills, previous records, and agent totals.
+- **`display_tournament_summary`** — Shows final standings with rankings, records, agent differentials, and ratios.
+- **`display_stacked_rounds`** — Shows a matrix view with players as rows and rounds as columns, tracking player progression.
+- **`display_match_details`** — Shows detailed game-by-game results for a specific match.
+- **`display_player_performance`** — Shows a player's performance over the tournament, including opponent information and group assignments.
+- **`display_skill_statistics`** — Shows basic statistics about player skill levels (mean, median, std dev).
+- **`display_metrics`** — Shows evaluation metrics for the tournament (skill gap, correlation, rematches).
+- **`display_metrics_comparison`** — Compares metrics across multiple tournaments.
+
+## Rating module
+
+The `tournament/rating.py` module provides rating functions for evaluating player performance:
+
+- **Basic functions** (unweighted): `total_agents_scored`, `total_agents_lost`, `agent_differential`, `agent_ratio`, `agent_total_ratio`
+- **Weighted functions**: `weighted_total_agents_scored`, `weighted_total_agents_lost`, `weighted_agent_differential`, `weighted_agent_ratio`, `weighted_agent_total_ratio`
+- **Weight utilities**: `linear_weights`, `exponential_weights` for creating weight sequences
+
+These functions take an agent sequence (list of tuples) and return a numeric rating, useful for tiebreakers or custom metrics.
 
 ## Tests
 

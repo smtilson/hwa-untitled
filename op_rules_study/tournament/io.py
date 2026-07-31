@@ -14,33 +14,47 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from .models import BYE, Game, Match, Player, Round, Tournament
-from .standings import Record, compute_records
+from .models import Game, Match, Player, Round, Tournament
+from .standings import compute_records
 
+# One row per match, storing both games so a match can be rebuilt exactly.
+# Sean tie breaker attention: the tie-break is stored as bonus agents
+# (`bonus_agents_a/b`), not a third game; they must be restored on read or the
+# tied-agent tiebreak is lost. `winner` is the winning player id, or empty for a
+# draw.
 MATCH_FIELDS = [
     "round",
     "player_a",
     "player_b",
-    "agents_a",
-    "agents_b",
+    "g1_agents_a",
+    "g1_agents_b",
+    "g2_agents_a",
+    "g2_agents_b",
+    "bonus_agents_a",
+    "bonus_agents_b",
+    "total_agents_a",
+    "total_agents_b",
     "winner",
-    "result_a",
-    "result_b",
-    # Sean remove byes
-    "is_bye",
+    "is_draw",
 ]
 STANDINGS_FIELDS = [
     "through_round",
     "pid",
     "name",
-    "match_wins",
-    "match_losses",
+    "game_wins",
+    "game_losses",
     "agents_for",
     "agents_against",
     "agent_diff",
-    "match_points",
+    "agent_total_ratio",
     "record",
 ]
+
+
+def _match_winner(m: Match) -> int | str:
+    """Winning player id, or "" for a draw."""
+    w = m.winner
+    return "" if w is None else w
 
 
 def write_matches(tournament: Tournament, path: str | Path) -> None:
@@ -51,24 +65,23 @@ def write_matches(tournament: Tournament, path: str | Path) -> None:
         w.writeheader()
         for rnd in tournament.rounds:
             for m in rnd.matches:
+                g1, g2 = m.games[0], m.games[1]
                 w.writerow(
                     {
                         "round": rnd.number,
                         "player_a": m.player_a,
                         "player_b": m.player_b,
-                        # Sean Update: `m.agents_a`/`agents_b`/`winner` were renamed/
-                        # removed on Match. Use `m.total_agents_a` / `m.total_agents_b`
-                        # and read the winner from `m.results`. Note: `read_matches()`
-                        # below rebuilds a single-game Match, which your new
-                        # `Match.is_valid` (expects exactly 2 games) would reject --
-                        # decide whether the CSV should store per-game detail.
-                        "agents_a": m.agents_a,
-                        "agents_b": m.agents_b,
-                        "winner": m.winner,
-                        "result_a": f"{m.agents_a}-{m.agents_b}",
-                        "result_b": f"{m.agents_b}-{m.agents_a}",
-                        # Sean remove byes
-                        "is_bye": int(m.is_bye),
+                        "g1_agents_a": g1.agents_a,
+                        "g1_agents_b": g1.agents_b,
+                        "g2_agents_a": g2.agents_a,
+                        "g2_agents_b": g2.agents_b,
+                        # Sean tie breaker attention: persist bonus agents.
+                        "bonus_agents_a": m.bonus_agents_a,
+                        "bonus_agents_b": m.bonus_agents_b,
+                        "total_agents_a": m.total_agents_a,
+                        "total_agents_b": m.total_agents_b,
+                        "winner": _match_winner(m),
+                        "is_draw": int(m.is_draw),
                     }
                 )
 
@@ -99,12 +112,12 @@ def write_standings(
                         "through_round": through,
                         "pid": rec.pid,
                         "name": names.get(rec.pid, ""),
-                        "match_wins": rec.match_wins,
-                        "match_losses": rec.match_losses,
+                        "game_wins": rec.wins,
+                        "game_losses": rec.losses,
                         "agents_for": rec.agents_for,
                         "agents_against": rec.agents_against,
                         "agent_diff": rec.agent_diff,
-                        "match_points": rec.match_points,
+                        "agent_total_ratio": f"{rec.agent_total_ratio:.6f}",
                         "record": rec.record_str,
                     }
                 )
@@ -118,15 +131,14 @@ def write_players(tournament: Tournament, path: str | Path) -> None:
         w = csv.writer(f)
         w.writerow(["pid", "name", "skill"])
         for p in tournament.players:
-            w.writerow([p.pid, p.name, f"{p.skill:.6f}"])
+            w.writerow([p.pid, p.name, str(p.skill)])
 
 
 def read_matches(path: str | Path, players: list[Player]) -> Tournament:
     """Reconstruct a :class:`Tournament` from a matches.csv file.
 
-    Game-by-game detail is not stored in the flat CSV, so each non-bye match is
-    rebuilt as a single aggregate :class:`Game`. Standings/metrics that depend
-    only on agent totals are unaffected.
+    Both games are stored per row, so each match is rebuilt as a valid two-game
+    :class:`Match`.
     """
     path = Path(path)
     tournament = Tournament(players=list(players))
@@ -135,19 +147,22 @@ def read_matches(path: str | Path, players: list[Player]) -> Tournament:
         for row in csv.DictReader(f):
             n = int(row["round"])
             rnd = rounds.setdefault(n, Round(number=n))
-            # Sean remove byes
-            if int(row["is_bye"]):
-                rnd.matches.append(Match(player_a=int(row["player_a"]), player_b=BYE))
-            else:
-                game = Game(
-                    agents_a=int(row["agents_a"]), agents_b=int(row["agents_b"])
-                )
-                rnd.matches.append(
-                    Match(
-                        player_a=int(row["player_a"]),
-                        player_b=int(row["player_b"]),
-                        games=[game],
-                    )
-                )
+            games = [
+                Game(
+                    agents_a=int(row["g1_agents_a"]), agents_b=int(row["g1_agents_b"])
+                ),
+                Game(
+                    agents_a=int(row["g2_agents_a"]), agents_b=int(row["g2_agents_b"])
+                ),
+            ]
+            # Sean tie breaker attention: restore bonus agents so totals round-trip.
+            match = Match(
+                player_a=int(row["player_a"]),
+                player_b=int(row["player_b"]),
+                games=games,
+                bonus_agents_a=int(row.get("bonus_agents_a") or 0),
+                bonus_agents_b=int(row.get("bonus_agents_b") or 0),
+            )
+            rnd.matches.append(match)
     tournament.rounds = [rounds[k] for k in sorted(rounds)]
     return tournament

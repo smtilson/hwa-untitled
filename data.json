@@ -1,657 +1,1724 @@
 [
     {
         "name": "Chairman Bo Pax",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/chairman-bo-pax/6186658dfc-1768746710/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/chairman-bo-pax/6186658dfc-1768746710/card.webp",
+        "abilityText": "(Action) If you have more cards in your front row than your rival, exhaust this card: They gain 1 Heat.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Captain Tal",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/captain-tal/164183057a-1769914796/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/captain-tal/164183057a-1769914796/card.webp",
+        "abilityText": "(Reaction) As you approach a Network, exhaust this card: Archive the top card of that Network.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Curator Eido",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/curator-eido/69f0ce3ddf-1755296966/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/curator-eido/69f0ce3ddf-1755296966/card.webp",
+        "abilityText": "(Reaction) As you approach a Council, exhaust this card and choose a player: They draw 1 card.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Goldie Xin",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/goldie-xin/9599dd1e39-1770745709/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Renegade"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/goldie-xin/9599dd1e39-1770745709/card.webp",
+        "abilityText": "(Action) If you have fewer Heat in your pool than your rival, exhaust this card: Gain 2 Shard and draw a card.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Abnus Orzo",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/abnus-orzo/354aa3983d-1768746710/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/abnus-orzo/354aa3983d-1768746710/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s Archives, exhaust this card and archive the top card of your Network: Archive a card at random from that player\u2019s Council.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Vesheve",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vesheve/aed5c13bf4-1755296966/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vesheve/aed5c13bf4-1755296966/card.webp",
+        "abilityText": "(Instant) Exhaust this card and archive an unforged card from your grid: Shuffle 1 card from your Archives into your Commons.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Jayko & Ace",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/jayko-&-ace/a05b6fdf53-1768746710/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Renegade"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/jayko-&-ace/a05b6fdf53-1768746710/card.webp",
+        "abilityText": "(Reaction) As you approach a district, exhaust this card and gain 1 Heat: Gain 2 Shard and draw a card.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Marwa",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/marwa/a84a24b729-1775242016/card.webp",
-        "type": "Seeker"
+        "type": "Seeker",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/marwa/a84a24b729-1775242016/card.webp",
+        "abilityText": "(Reaction) After you pass a player\u2019s forged card, if you have fewer Shard in your pool than they have, exhaust this card: Steal 1 Shard from their pool.",
+        "shardCost": null,
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Frost",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/frost/d28f06506f-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/frost/d28f06506f-1770745709/card.webp",
+        "abilityText": "(Reaction) As you engage a card in a grid, exhaust this card: That card gets -2 Scrap Cost until the engagement ends. (\u201cEngage\u201d includes both confront and discover.)",
+        "shardCost": "2",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Gargala Larga",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/gargala-larga/5ec13fe367-1768746710/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/gargala-larga/5ec13fe367-1768746710/card.webp",
+        "abilityText": "(Instant) Exhaust this card: Unexhaust your seeker.",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "1"
     },
     {
         "name": "Prime Treasurer Geel",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/prime-treasurer-geel/301da812fa-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/prime-treasurer-geel/301da812fa-1746720029/card.webp",
+        "abilityText": "While this card is forged: Each other agent and obstacle in your grid gets +1 Barrier.\n(Discover) If this card is in your grid: Gain 4 Shard.",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "2"
     },
     {
         "name": "Renovator Warlan",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/renovator-warlan/3b6aedd1b1-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/renovator-warlan/3b6aedd1b1-1746720029/card.webp",
+        "abilityText": "(Reaction) After a card is archived or exiled from a grid, exhaust this card and choose a player: That player exhausts a card in the front row of their grid.",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "2"
     },
     {
         "name": "Ulin Marr",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/ulin-marr/33e58270cb-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/ulin-marr/33e58270cb-1770745709/card.webp",
+        "abilityText": "(Action) Exhaust this card: Stage 2 cards (you can stage agents, obstacles, and sources).",
+        "shardCost": "2",
+        "barrier": "4",
+        "scrapCost": "1"
     },
     {
         "name": "Auntie Ruth",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/auntie-ruth/a34e2295e3-1772825490/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/auntie-ruth/a34e2295e3-1772825490/card.webp",
+        "abilityText": "(Reaction) Exhaust this card and choose a player: They draw 2 cards.",
+        "shardCost": "3",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Big Varna Gorvis",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/big-varna-gorvis/109b4403e7-1772825490/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/big-varna-gorvis/109b4403e7-1772825490/card.webp",
+        "abilityText": "(Action) If you have more cards in your Council than your rival, exhaust this card: Gain 3 Shard.\n(Discover) If you have more cards in your Council than engaging player: Archive a random card from their Council and archive the top card of their Network.",
+        "shardCost": "2",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Boss Bresloo",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/boss-bresloo/a83d52c4a5-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/boss-bresloo/a83d52c4a5-1770745709/card.webp",
+        "abilityText": "(Reaction) After this card is forged, choose a player: Unforge a card with 3 shard cost or less in that player\u2019s grid.\n(Discover) If this card is in your grid: Unforge a card in engaging player\u2019s grid, then exhaust it.",
+        "shardCost": "4",
+        "barrier": "2",
+        "scrapCost": "3"
     },
     {
         "name": "Guildmaster Yanos",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/guildmaster-yanos/88256fa145-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/guildmaster-yanos/88256fa145-1770745709/card.webp",
+        "abilityText": "While this card is forged: Each other card in your grid gets -1 shard cost (forged or unforged).",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "1"
     },
     {
         "name": "Recruiter Nilero",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/recruiter-nilero/c96b59059f-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/recruiter-nilero/c96b59059f-1770745709/card.webp",
+        "abilityText": "(Reaction) As you begin discovering cards from a Council, exhaust this card: Discover +2 cards.\n(Discover) Choose a player: They draw 2 cards.",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "2"
     },
     {
         "name": "Rory & Bug",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rory-&-bug/06f4cd300a-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Renegade"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rory-&-bug/06f4cd300a-1770745709/card.webp",
+        "abilityText": "(Instant) Exhaust this card and archive a card from your Council: Shift this card.",
+        "shardCost": "1",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Coroner Goodman",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/coroner-goodman/c1d799928e-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/coroner-goodman/c1d799928e-1746720029/card.webp",
+        "abilityText": "(Reaction) As a player engages one of your agents, obstacles, or sources, exhaust this card and exile 1 card from your Archives: The engaged card gets +3 Presence until the engagement ends.",
+        "shardCost": "1",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Counselor Vreenax",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/counselor-vreenax/eebda15b4a-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/counselor-vreenax/eebda15b4a-1746720029/card.webp",
+        "abilityText": "While this card is forged: Each card in your rival\u2019s grid gets +1 shard cost.",
+        "shardCost": "4",
+        "barrier": "4",
+        "scrapCost": "1"
     },
     {
         "name": "Doctor Twilight",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/doctor-twilight/38147dd488-1768746710/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/doctor-twilight/38147dd488-1768746710/card.webp",
+        "abilityText": "(Instant) Exhaust this card and scrap a card from your Archives: Gain 3 Shard.",
+        "shardCost": "3",
+        "barrier": "3",
+        "scrapCost": "3"
     },
     {
         "name": "Nosmara",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/nosmara/3138f187a0-1750983252/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/nosmara/3138f187a0-1750983252/card.webp",
+        "abilityText": "(Instant) During another player\u2019s delve, exhast this card: Redirect their delve to approach a grid slot adjacent to their current position.\n(Discover): Look at the top 2 cards of engaing player\u2019s Commons.",
+        "shardCost": "3",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Sergeant Cole",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/sergeant-cole/8a38094fe4-1770745709/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Renegade"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/sergeant-cole/8a38094fe4-1770745709/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s Archives, exhaust this card: Archive the bottom 2 cards of their Network.",
+        "shardCost": "2",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Vulu-Malu",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vulu-malu/b6d331e2d4-1750983252/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vulu-malu/b6d331e2d4-1750983252/card.webp",
+        "abilityText": "(Reaction) After you resolve a Discover ability, exhaust this card: Resolve that ability again.\n(Discover) If this card is in your grid: Search your Commons for a card, show it to another player, and add it to your Council. (Shuffle.)",
+        "shardCost": "3",
+        "barrier": "3",
+        "scrapCost": "3"
     },
     {
         "name": "Baz Illisk",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/baz-illisk/c8f9ed6098-1772825490/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/baz-illisk/c8f9ed6098-1772825490/card.webp",
+        "abilityText": "While this card is forged: Each other card in your grid gets +1 Scrap Cost (forged or unforged).\n(Discover) If this card is in your grid: Add a card in engaging player\u2019s grid to their Council.",
+        "shardCost": "2",
+        "barrier": "2",
+        "scrapCost": "3"
     },
     {
         "name": "Dralber the Fence",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/dralber-the-fence/4a5606a7d0-1772825490/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Paragon"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/dralber-the-fence/4a5606a7d0-1772825490/card.webp",
+        "abilityText": "(Reaction) After you play a moment, exhaust this card: Gain 2 Shard.\n(Discover): Shuffle a moment from your Scrap into your Network (of your choice).",
+        "shardCost": "3",
+        "barrier": "3",
+        "scrapCost": "3"
     },
     {
         "name": "Kryzar the Rat",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/kryzar-the-rat/8826f88d7e-1772825490/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/kryzar-the-rat/8826f88d7e-1772825490/card.webp",
+        "abilityText": "Rush 5. (As an instant, pay 5 Shard to stage this card from your Council forged.)\n(Instant) During your delve, exhaust this card and archive a card from your Council: Redirect your delve to approach a grid slot or district adjacent to your current position.",
+        "shardCost": "5",
+        "barrier": "2",
+        "scrapCost": "4"
     },
     {
         "name": "Linza Ree",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/linza-ree/3e6c40b24e-1775242016/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Renegade"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/linza-ree/3e6c40b24e-1775242016/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s district, exhaust this card: Steal 1 Shard from their pool.\n(Discover): Steal 1 Shard from engaging player\u2019s pool.",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "2"
     },
     {
         "name": "Maestro",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/maestro/5405153967-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Visionary"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/maestro/5405153967-1746720029/card.webp",
+        "abilityText": "(Reaction) As you approach a district, exhaust this card: Stage 1 card (you can stage agents, obstacles, and sources).",
+        "shardCost": "3",
+        "barrier": "4",
+        "scrapCost": "1"
     },
     {
         "name": "Vapor X",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vapor-x/8aa4ec2504-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Renegade"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vapor-x/8aa4ec2504-1746720029/card.webp",
+        "abilityText": "Exhaust this card and lose 1 Shard: Swap two other cards in your grid.",
+        "shardCost": "2",
+        "barrier": "3",
+        "scrapCost": "1"
     },
     {
         "name": "\u201cSpider\u201d Rebbek",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/spider-rebbek/15b9b52ea0-1746720029/card.webp",
-        "type": "Agent"
+        "type": "Agent",
+        "traits": [
+            "Enforcer"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/spider-rebbek/15b9b52ea0-1746720029/card.webp",
+        "abilityText": "While this card is forged: Each other card in your grid gets +1 Presence.\n(Discover) If this card is in your grid: Exhaust a forged card in engaging player\u2019s grid.",
+        "shardCost": "2",
+        "barrier": "3",
+        "scrapCost": "2"
     },
     {
         "name": "Priority Expressway",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/priority-expressway/0a0ebbefeb-1750983252/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/priority-expressway/0a0ebbefeb-1750983252/card.webp",
+        "abilityText": "Cache 2. (As this is forged, place 2 Shard here).\n(Confront) Remove 1 Shard from here: Gain 2 Shard.",
+        "shardCost": "0",
+        "barrier": "0",
+        "scrapCost": "4"
     },
     {
         "name": "Rent-a-Sentry",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rent-a-sentry/a0d1e44877-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Being",
+            "Contraption"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rent-a-sentry/a0d1e44877-1755296966/card.webp",
+        "abilityText": "Cache 2. (As this is forged, place 2 Shard here.)\n(Confront) Remove 1 Shard from here: This card gets +2 Barrier until the confrontation ends.",
+        "shardCost": "0",
+        "barrier": "0",
+        "scrapCost": "3"
     },
     {
         "name": "Transit Station",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/transit-station/952df86936-1768746710/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/transit-station/952df86936-1768746710/card.webp",
+        "abilityText": "While this card is in your front row: It gets +4 Presence.\nWhile this card is in your middle row: It gets +2 Barrier.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "1"
     },
     {
         "name": "Ttakjaw Hive",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/ttakjaw-hive/deba5d9a52-1770745709/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Being",
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/ttakjaw-hive/deba5d9a52-1770745709/card.webp",
+        "abilityText": "Cache 2. (As this is forged, place 2 Shard here.)\n(Confront) Remove 1 Shard from here: Archive the top card of engaging player\u2019s Network.",
+        "shardCost": "2",
+        "barrier": "2",
+        "scrapCost": "4"
     },
     {
         "name": "Asset Protection Hub",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/asset-protection-hub/134de5d0ca-1770745709/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/asset-protection-hub/134de5d0ca-1770745709/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Scrap Cost is paid, gain 1 Shard.)\nWhile this card is forged: Each adjacent forged agent and obstacle gets +1 Barrier.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "3"
     },
     {
         "name": "Pushy Salesperson",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/pushy-salesperson/48c0ee0698-1750983252/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/pushy-salesperson/48c0ee0698-1750983252/card.webp",
+        "abilityText": "(Confront): Engaging player may exhaust a card in their Commons path. If they do not, end the delve.\n(Discover) If this card is in your grid: Forge this card for -4 shard cost, then redirect engaging player to approach this card\u2019s grid slot.",
+        "shardCost": "4",
+        "barrier": "2",
+        "scrapCost": "5"
     },
     {
         "name": "Rookery Muscle",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rookery-muscle/088f361f71-1770745709/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rookery-muscle/088f361f71-1770745709/card.webp",
+        "abilityText": "(Reaction) As a confrontation with this card ends, if engaging player did not pay this card\u2019s Barrier during the confrontation: Archive the top 2 cards of their Network.",
+        "shardCost": "3",
+        "barrier": "3",
+        "scrapCost": "4"
     },
     {
         "name": "Flustering Muckraker",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/flustering-muckraker/4f4ba8b1de-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/flustering-muckraker/4f4ba8b1de-1755296966/card.webp",
+        "abilityText": "(Confront): Engaging player may exhaust a forged source in their grid. If they do not, they gain 1 Heat.\n(Discover): Exhaust a forged source in engaging player\u2019s grid.",
+        "shardCost": "4",
+        "barrier": "2",
+        "scrapCost": "4"
     },
     {
         "name": "Probabilities Exchange",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/probabilities-exchange/fbdd22ecd9-1746720029/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/probabilities-exchange/fbdd22ecd9-1746720029/card.webp",
+        "abilityText": "(Confront): Engaging player shuffles 1 card from their grid into their Commons.",
+        "shardCost": "3",
+        "barrier": "1",
+        "scrapCost": "4"
     },
     {
         "name": "Flooding Thoroughfare",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/flooding-thoroughfare/2e6b58e9fa-1768746710/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/flooding-thoroughfare/2e6b58e9fa-1768746710/card.webp",
+        "abilityText": "(Reaction) After this card is forged during a delve: This card gets +2 Barrier until the delve ends.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "3"
     },
     {
         "name": "Prized Gulk",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/prized-gulk/e25b4c012e-1750983252/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Being"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/prized-gulk/e25b4c012e-1750983252/card.webp",
+        "abilityText": "(Confront): Gain 1 Shard.\n(Discover): Gain 1 Shard.",
+        "shardCost": "2",
+        "barrier": "1",
+        "scrapCost": "5"
     },
     {
         "name": "Waterway Ferry",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/waterway-ferry/146d7a05d5-1772306996/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/waterway-ferry/146d7a05d5-1772306996/card.webp",
+        "abilityText": "(Reaction) After this card is forged: Shift it.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "3"
     },
     {
         "name": "Babbling Loomkeeper",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/babbling-loomkeeper/df9b9375df-1768746710/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Contraption",
+            "Persona"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/babbling-loomkeeper/df9b9375df-1768746710/card.webp",
+        "abilityText": "(Confront): Engaging player may archive 2 random cards from their Council. If they do not, they draw 4 cards.\n(Discover) If this card is in your grid, choose a player: They draw 4 cards.",
+        "shardCost": "4",
+        "barrier": "1",
+        "scrapCost": "4"
     },
     {
         "name": "Canal Network",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/canal-network/347f6b777c-1770745709/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/canal-network/347f6b777c-1770745709/card.webp",
+        "abilityText": "(Confront) Choose a player: Shift an unforged card in their grid.\n(Discover) If this card is in your grid, choose a player: Shift a card in their grid (forged or unforged).",
+        "shardCost": "3",
+        "barrier": "2",
+        "scrapCost": "5"
     },
     {
         "name": "Salvage Rats",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/salvage-rats/da64cda314-1772825490/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/salvage-rats/da64cda314-1772825490/card.webp",
+        "abilityText": "Rush 4. (As an instant, pay 4 Shard to stage this card from your Council forged.)\n(Confront) If this card is adjacent to at least 1 unforged card: Gain 2 Shard.",
+        "shardCost": "4",
+        "barrier": "2",
+        "scrapCost": "4"
     },
     {
         "name": "Canalevator",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/canalevator/2c4baa0b5e-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/canalevator/2c4baa0b5e-1755296966/card.webp",
+        "abilityText": "(Confront): Engaging player may lose Action. If they do not, gain Action.",
+        "shardCost": "4",
+        "barrier": "2",
+        "scrapCost": "4"
     },
     {
         "name": "Emperor Drejj",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/emperor-drejj/df71108de0-1772306996/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Being"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/emperor-drejj/df71108de0-1772306996/card.webp",
+        "abilityText": "(Reaction) After you forge a card: Shift this card.\n(Discover) Archive a card from your Council: Shift a forged card in engaging player\u2019s grid.",
+        "shardCost": "5",
+        "barrier": "2",
+        "scrapCost": "6"
     },
     {
         "name": "Barbican Gate",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/barbican-gate/3b084b787e-1746720029/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/barbican-gate/3b084b787e-1746720029/card.webp",
+        "abilityText": "(Confront): Engaged player may exhaust a forged card in their grid. If they do not, gain 2 Shard.\n(Discover): Gain 1 Shard.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "4"
     },
     {
         "name": "Silent Interrogator",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/silent-interrogator/417f912246-1770745709/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/silent-interrogator/417f912246-1770745709/card.webp",
+        "abilityText": "(Discover): Archive the bottom 2 cards of engaging player\u2019s Network (bottom 4 cards instead if this card is in your grid).",
+        "shardCost": "0",
+        "barrier": "0",
+        "scrapCost": "2"
     },
     {
         "name": "Echofield Lockup",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/echofield-lockup/066e45e4db-1750983252/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/echofield-lockup/066e45e4db-1750983252/card.webp",
+        "abilityText": "While you have 3 or more cards in your Archives: This card gets +3 Presence.\n(Discover) If you have 3 or more cards in your Archives: Gain 3 Shard.",
+        "shardCost": "1",
+        "barrier": "2",
+        "scrapCost": "2"
     },
     {
         "name": "Detour Field",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/detour-field/c6d538555b-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Contraption",
+            "Location"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/detour-field/c6d538555b-1755296966/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Presence is broken, gain 1 Shard.)\n(Confront) Archive the top card of your Commons: This card gets +3 Barrier until the confrontation ends.",
+        "shardCost": "2",
+        "barrier": "0",
+        "scrapCost": "4"
     },
     {
         "name": "Eye Enforcers",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/eye-enforcers/0e16e89216-1768746710/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/eye-enforcers/0e16e89216-1768746710/card.webp",
+        "abilityText": "(Confront) Lose 1 Shard: Archive a card at random from engaging player\u2019s Council.\n(Discover) If this card is in your grid, archive it: Archive 2 cards at random from engaging player\u2019s Council.",
+        "shardCost": "4",
+        "barrier": "3",
+        "scrapCost": "5"
     },
     {
         "name": "Tele-Bridge Expo",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tele-bridge-expo/73d8171647-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tele-bridge-expo/73d8171647-1755296966/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Presence is broken, gain 1 Shard.)\n(Reaction) After a player completes an encounter with this card during a delve, exhaust this card: Redirect engaging player to approach an adjacent grid slot.",
+        "shardCost": "1",
+        "barrier": "2",
+        "scrapCost": "3"
     },
     {
         "name": "Yowling Tezu",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/yowling-tezu/27525b9c3b-1746720029/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Being"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/yowling-tezu/27525b9c3b-1746720029/card.webp",
+        "abilityText": "(Confront) Gain 1 Heat: Engaging player gains 1 Heat.\n(Discover) If this card is in your grid, archive it: Engaging player gains 2 Heat.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "3"
     },
     {
         "name": "Big Rok Bouncer",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/big-rok-bouncer/b03853e47b-1772825490/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/big-rok-bouncer/b03853e47b-1772825490/card.webp",
+        "abilityText": "(Confront): Engaging player exhausts forged cards worth 4 Scrap Cost or more in their grid. If they do not, end the delve.",
+        "shardCost": "2",
+        "barrier": "0",
+        "scrapCost": "4"
     },
     {
         "name": "Hired Lookout",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/hired-lookout/dcfbc552ca-1750983252/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/hired-lookout/dcfbc552ca-1750983252/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Presence is broken, gain 1 Shard).\n(Confront): Engaging player may exhaust a card in their back row. If they do not, end the delve.",
+        "shardCost": "1",
+        "barrier": "0",
+        "scrapCost": "4"
     },
     {
         "name": "Narrow Catwalk",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/narrow-catwalk/0d2d84b268-1750983252/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/narrow-catwalk/0d2d84b268-1750983252/card.webp",
+        "abilityText": "(Confront): Look at the top card of engaing playe\u2019s Commons. If that card is a moment, archive it.\n(Discover): Look at the top card of engaing playe\u2019s Commons. If that card is a moment, archive it.",
+        "shardCost": "2",
+        "barrier": "2",
+        "scrapCost": "3"
     },
     {
         "name": "Orobo Pickpocket",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/orobo-pickpocket/8dfc1b352f-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/orobo-pickpocket/8dfc1b352f-1755296966/card.webp",
+        "abilityText": "(Discover): Steal 1 Shard from engaging player\u2019s pool.",
+        "shardCost": "0",
+        "barrier": "0",
+        "scrapCost": "2"
     },
     {
         "name": "Wary Locals",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/wary-locals/2511527d68-1755296966/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/wary-locals/2511527d68-1755296966/card.webp",
+        "abilityText": "(Confront) If you have fewer cards in your Council than engaging player: Engaging player gains 1 Heat.\n(Discover) If you have fewer cards in your Council than engaging player: Engaging player gains 1 Heat.",
+        "shardCost": "2",
+        "barrier": "1",
+        "scrapCost": "3"
     },
     {
         "name": "Silkline Skycab",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/silkline-skycab/665e6d2c51-1768746710/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/silkline-skycab/665e6d2c51-1768746710/card.webp",
+        "abilityText": "(Confront): Swap 2 other cards in your grid.\n(Discover) If this card is in your grid: Swap 2 cards in engaging player\u2019s grid.",
+        "shardCost": "2",
+        "barrier": "1",
+        "scrapCost": "4"
     },
     {
         "name": "Street Parade",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/street-parade/1caa0179dd-1772825490/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/street-parade/1caa0179dd-1772825490/card.webp",
+        "abilityText": "Rush 4. (As an instant, pay 4 Shard to stage this card from your Council forged.)",
+        "shardCost": "4",
+        "barrier": "3",
+        "scrapCost": "5"
     },
     {
         "name": "Orobo Plaza",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/orobo-plaza/26925975bd-1775242016/card.webp",
-        "type": "Obstacle"
+        "type": "Obstacle",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/orobo-plaza/26925975bd-1775242016/card.webp",
+        "abilityText": "(Confront) If you have 2 Heat or more in your pool: Steal 1 Shard from engaging player\u2019s pool.\n(Discover): Resolve this card\u2019s printed Confront ability.",
+        "shardCost": "1",
+        "barrier": "1",
+        "scrapCost": "3"
     },
     {
         "name": "Shardwinner",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/shardwinner/54e9656fcb-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/shardwinner/54e9656fcb-1770745709/card.webp",
+        "abilityText": "While this card is in your Council path: It gets +Shard collection icon.\nWhile this card is in your Network path: It gets +3 Scrap Cost.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Bubblemap Kiosk",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/bubblemap-kiosk/61a01c2beb-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/bubblemap-kiosk/61a01c2beb-1770745709/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Scrap Cost is paid, gain 1 Shard.)\n(Reaction) As you begin discovering cards from a Network, exhaust this card: Discover from the bottom of that Network (starting with the bottom card and moving upward).",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Crispy Crawler",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/crispy-crawler/3fafebfef8-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/crispy-crawler/3fafebfef8-1746720029/card.webp",
+        "abilityText": "Cache 2. (As this is forged, place 2 Shard here.)\n(Reaction) As the round begins, remove 1 Shard from here: Gain 1 Shard.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "2"
     },
     {
         "name": "Disagreeable Inspector",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/disagreeable-inspector/c91f4a94dd-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/disagreeable-inspector/c91f4a94dd-1770745709/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Scrap Cost is paid, gain 1 Shard.)\n(Reaction) As you confront a card, exhaust this card: That card gets -2 Barrier until the confrontation ends.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "2"
     },
     {
         "name": "Creative Accountant",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/creative-accountant/0ab51b7b8f-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/creative-accountant/0ab51b7b8f-1770745709/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Scrap Cost is paid, gain 1 Shard.)\n(Reaction) After a card leaves your grid, exhaust this card: Gain 2 Shard.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Ttakjaw Scavenger",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/ttakjaw-scavenger/13a597fb52-1769914796/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Being"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/ttakjaw-scavenger/13a597fb52-1769914796/card.webp",
+        "abilityText": "Cache 2. (As this is forged, place 2 Shard here.)\n(Reaction) As you approach a player\u2019s district, exhaust this card and remove 1 Shard from here: Archive the top card of their Network.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "3Z News Crew",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/3z-news-crew/4f6ae48846-1755296966/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/3z-news-crew/4f6ae48846-1755296966/card.webp",
+        "abilityText": "(Reaction) As you approach a player\u2019s Commons, exhaust this card: They gain 1 Heat.",
+        "shardCost": "4",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Pax Observatory",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/pax-observatory/0d09575ef5-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/pax-observatory/0d09575ef5-1746720029/card.webp",
+        "abilityText": "(Reaction) As you refill Action during the refresh phase: Increase the number you refill to by 1.",
+        "shardCost": "6",
+        "barrier": null,
+        "scrapCost": "6"
     },
     {
         "name": "Cargo Manifest",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cargo-manifest/70a202d39f-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cargo-manifest/70a202d39f-1770745709/card.webp",
+        "abilityText": "(Reaction) After this card is forged, choose a player: Look at the top card of their Network. You may add that card to the bottom of their Network.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Hoarder\u2019s Array",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/hoarders-array/32bd0d35f7-1750983252/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/hoarders-array/32bd0d35f7-1750983252/card.webp",
+        "abilityText": "While this card is forged: Your seeker gets +1 council limit.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Waterfront Soakhouse",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/waterfront-soakhouse/5d24afde4d-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/waterfront-soakhouse/5d24afde4d-1746720029/card.webp",
+        "abilityText": "While you have fewer Heat in your pool than your rival: This card gets +4 Presence.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "2"
     },
     {
         "name": "Job Board",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/job-board/746d2e14b9-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/job-board/746d2e14b9-1746720029/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Presence is broken, gain 1 Shard.)\nWhile this card is forged: Each adjacent card gets -1 shard cost.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Tele-Mail Cluster",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tele-mail-cluster/40c079d4d0-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tele-mail-cluster/40c079d4d0-1770745709/card.webp",
+        "abilityText": "(Reaction) After this card is forged: Stage a card (you can stage agents, obstacles, and sources).",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Lost Byway",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/lost-byway/0c3b1c56c9-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/lost-byway/0c3b1c56c9-1746720029/card.webp",
+        "abilityText": "(Reaction) After this card is forged: Lose 1 Heat.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Mender Mycologists",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/mender-mycologists/13b164467d-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/mender-mycologists/13b164467d-1770745709/card.webp",
+        "abilityText": "(Action) Exhaust this card and an unforged card in your grid: Gain 3 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Sweeping Scavenger",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/sweeping-scavenger/7cbfeca1ef-1770745709/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/sweeping-scavenger/7cbfeca1ef-1770745709/card.webp",
+        "abilityText": "(Reaction) After this card shifts: Unexhaust it.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "2"
     },
     {
         "name": "Wirecrawler",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/wirecrawler/517c10848a-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Being"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/wirecrawler/517c10848a-1746720029/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Presence is broken, gain 1 Shard.)\n(Instant) Exhaust this card: Shift it.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Tunnel Runners",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tunnel-runners/9cf60cb3d8-1772306996/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Being",
+            "Persona"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tunnel-runners/9cf60cb3d8-1772306996/card.webp",
+        "abilityText": "(Instant) Exhaust this card: Shift it.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Capricious Informant",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/capricious-informant/609dda8c26-1768746710/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/capricious-informant/609dda8c26-1768746710/card.webp",
+        "abilityText": "(Instant) Exhaust this card and look at the top 2 cards of your Network: Add 1 of those to your Council and archive the other.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Cargo Inspector",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cargo-inspector/24c6a06c2a-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cargo-inspector/24c6a06c2a-1746720029/card.webp",
+        "abilityText": "(Instant) Exhaust this card: Draw 2 cards. Archive 1 card from your Council.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "5"
     },
     {
         "name": "Echofield Registry",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/echofield-registry/65c68766cd-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/echofield-registry/65c68766cd-1746720029/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a district, exhaust this card: Shuffle 1 card from your Archives into your Commons (of your choice). Draw 1 card.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Private Exo-Bridge",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/private-exo-bridge/a884e2fbb3-1750983252/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/private-exo-bridge/a884e2fbb3-1750983252/card.webp",
+        "abilityText": "(Action) Exhaust this card and archive 1 card from your Council: Gain 3 Shard.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Containment Funnel",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/containment-funnel/feb7d5de31-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/containment-funnel/feb7d5de31-1746720029/card.webp",
+        "abilityText": "(Reaction) As a player confronts an adjacent card, exhaust this card: Redirect that player to confront this card.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Echopomp Revoker",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/echopomp-revoker/33d78b5d49-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/echopomp-revoker/33d78b5d49-1746720029/card.webp",
+        "abilityText": "(Instant) During a delve, exhaust this card and exile 2 cards from your Archives: End the delve.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": "6"
     },
     {
         "name": "The Dragon\u2019s Hoard",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/the-dragons-hoard/f4415244ea-1768746710/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/the-dragons-hoard/f4415244ea-1768746710/card.webp",
+        "abilityText": "While this card is forged: Each adjacent card gets +1 Presence (forged or unforged).",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Wall Wizard",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/wall-wizard/2716588482-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/wall-wizard/2716588482-1746720029/card.webp",
+        "abilityText": "Refund 1. (As this card\u2019s Presence is broken, gain 1 Shard.)\n(Reaction) After you complete a breach on a district, exhaust this card: Gain 2 Shard.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Cortex Data-Flipper",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cortex-data-flipper/9e66190240-1772825490/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cortex-data-flipper/9e66190240-1772825490/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s Network, exhaust this card: Steal 1 Shard from their pool.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "Honeycomb Hooligans",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/honeycomb-hooligans/8b163a6461-1772825490/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Persona"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/honeycomb-hooligans/8b163a6461-1772825490/card.webp",
+        "abilityText": "(Reaction) As a Confront ability begins to resolve, exhaust this card: Cancel that resolution.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Daring Aeroboarder",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/daring-aeroboarder/6d1c7d8a63-1746720029/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/daring-aeroboarder/6d1c7d8a63-1746720029/card.webp",
+        "abilityText": "(Reaction) As you approach a grid slot, if you have 3 or fewer cards in your Council, exhaust this card: Redirect your delve to approach a grid slot adjacent to your current position.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Marauder\u2019s Market",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/marauders-market/aa351479e4-1772825490/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Location"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/marauders-market/aa351479e4-1772825490/card.webp",
+        "abilityText": "While you have 3 Shard or fewer in your pool: This card gets +Shard collection icon.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": "4"
     },
     {
         "name": "The Starlight Special",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/the-starlight-special/d6a32e7dd1-1772825490/card.webp",
-        "type": "Source"
+        "type": "Source",
+        "traits": [
+            "Contraption"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/the-starlight-special/d6a32e7dd1-1772825490/card.webp",
+        "abilityText": "(Instant) During your delve, exhaust this card and gain 1 Heat: Redirect your delve to approach a grid slot or district adjacent to your current position.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": "3"
     },
     {
         "name": "Protecting Our Investment",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/protecting-our-investment/1b812f09fa-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Tactic"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/protecting-our-investment/1b812f09fa-1746720029/card.webp",
+        "abilityText": "(Reaction) As a player confronts an obstacle in your grid: That obstacle gets +3 Barrier until the confrontation ends.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Bold New Flavor",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/bold-new-flavor/4c0b549507-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/bold-new-flavor/4c0b549507-1770745709/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a Network: Gain 3 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Cornering the Market",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cornering-the-market/e21ffa2371-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cornering-the-market/e21ffa2371-1746720029/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a Commons: Gain 3 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Closed-Door Meeting",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/closed-door-meeting/a9368cdc96-1768746710/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence",
+            "Tactic"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/closed-door-meeting/a9368cdc96-1768746710/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a Network: Archive the top 2 cards of that Network.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Franchise Fees",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/franchise-fees/d95e1a804d-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Influence"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/franchise-fees/d95e1a804d-1746720029/card.webp",
+        "abilityText": "(Action) Exhaust a card in your front row: Gain 4 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Rapid Growth",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rapid-growth/dd857018b0-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rapid-growth/dd857018b0-1746720029/card.webp",
+        "abilityText": "(Action): Stage up to 3 cards (you can stage agents, obstacles, and sources).",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "VIP Treatment",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vip-treatment/05e00a0711-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Tactic"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/vip-treatment/05e00a0711-1770745709/card.webp",
+        "abilityText": "(Instant) Archive a card from your grid and choose a player: Exhaust a card in their grid.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Print on Demand",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/print-on-demand/82f7776ff5-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/print-on-demand/82f7776ff5-1746720029/card.webp",
+        "abilityText": "(Action): Search your Commons for a source, show it to another player, and stage it. (Shuffle.)",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Forced Liquidation",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/forced-liquidation/a639852e8f-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Tactic"
+        ],
+        "faction": null,
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/forced-liquidation/a639852e8f-1746720029/card.webp",
+        "abilityText": "(Reaction) As you approach a forged card, exhaust a forged card with 4 Barrier or more in your grid: Archive the approached card.",
+        "shardCost": "3",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Cooling Off",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cooling-off/1250ac865e-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cooling-off/1250ac865e-1770745709/card.webp",
+        "abilityText": "(Action) Choose a player: They lose 1 Heat and draw a card.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Recalibrate",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/recalibrate/290aa843e4-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Knowledge"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/recalibrate/290aa843e4-1770745709/card.webp",
+        "abilityText": "(Instant) Unforge a card in your grid: Draw 1 card.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Prefab Construction",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/prefab-construction/ab04702676-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Knowledge"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/prefab-construction/ab04702676-1770745709/card.webp",
+        "abilityText": "(Instant): Forge a card in your grid for -3 shard cost.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Threading Through",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/threading-through/0f959bcf5f-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Knowledge",
+            "Tactic"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/threading-through/0f959bcf5f-1746720029/card.webp",
+        "abilityText": "(Instant): Shift a card in your grid.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Calling in Favors",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/calling-in-favors/df95feff30-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Influence"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/calling-in-favors/df95feff30-1770745709/card.webp",
+        "abilityText": "(Action Action): Gain 4 Shard and draw a card.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Infiltrate",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/infiltrate/6539922144-1768746710/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/infiltrate/6539922144-1768746710/card.webp",
+        "abilityText": "(Reaction) As you begin discovering cards in a Council: Discover +2 cards.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Rummaging for Parts",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rummaging-for-parts/e13a7d870d-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Knowledge"
+        ],
+        "faction": "Omniworks",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/rummaging-for-parts/e13a7d870d-1770745709/card.webp",
+        "abilityText": "(Instant): Draw 3 cards. Shuffle 3 cards from your Council into your Network.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Calling in a Specialist",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/calling-in-a-specialist/8674ebaccf-1770745709/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/calling-in-a-specialist/8674ebaccf-1770745709/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a district: Search your Network for an agent, show it to an opponent, and add it to your Council. (Shuffle.)",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Likely a Trap",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/likely-a-trap/d99cfc9561-1768746710/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge",
+            "Tactic"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/likely-a-trap/d99cfc9561-1768746710/card.webp",
+        "abilityText": "(Action) Choose an unforged card in your grid and choose an opponent: They may discover that card. If they do not, gain 3 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Eyes in the Sky",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/eyes-in-the-sky/6f007a8526-1750983252/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/eyes-in-the-sky/6f007a8526-1750983252/card.webp",
+        "abilityText": "(Reaction) As you confront a card in a player\u2019s grid: They may lose 3 Shard. If they do not, bypass that card.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Exo-Export Levies",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/exo-export-levies/81882c4ea4-1750983252/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Knowledge"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/exo-export-levies/81882c4ea4-1750983252/card.webp",
+        "abilityText": "(Action) Exile 1 card from your Archives: Gain 4 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Paper Trail",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/paper-trail/7ab86153f0-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge",
+            "Tactic"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/paper-trail/7ab86153f0-1746720029/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s Archives: Discover 1 card in their Council.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Trading Secrets",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/trading-secrets/6ecec30781-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/trading-secrets/6ecec30781-1746720029/card.webp",
+        "abilityText": "(Instant) Archive the top 2 cards of your Commons: Gain 2 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Twice as Bad",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/twice-as-bad/391dec4960-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/twice-as-bad/391dec4960-1746720029/card.webp",
+        "abilityText": "(Reaction) After you resolve a Discover ability: Resolve that ability again.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Propaganda",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/propaganda/9b523c95a6-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence",
+            "Subterfuge"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/propaganda/9b523c95a6-1746720029/card.webp",
+        "abilityText": "(Action) Show another player an agent in your Council or Archives: Gain 4 Shard.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Cracking Down",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cracking-down/8c81e838e3-1755296966/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence"
+        ],
+        "faction": "Collective",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/cracking-down/8c81e838e3-1755296966/card.webp",
+        "abilityText": "(Reaction) As you approach a forged card, archive the top 4 cards of your Commons: Archive the approached card.",
+        "shardCost": "2",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Tenacity",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tenacity/c41927a6a8-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Influence"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/tenacity/c41927a6a8-1746720029/card.webp",
+        "abilityText": "(Reaction) As a player engages a card in your grid: That card gets +3 Presence until the engagement ends. (\u201cEngage\u201d includes both confront and discover.)",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Turn Up the Heat",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/turn-up-the-heat/d5f23ef1c9-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Tactic"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/turn-up-the-heat/d5f23ef1c9-1746720029/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s district: They gain 1 Heat.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Dodge",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/dodge/8bb576e7a4-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Tactic"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/dodge/8bb576e7a4-1746720029/card.webp",
+        "abilityText": "(Reaction) As a Confront or Discover ability begins to resolve: Cancel that resolution.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Fun Run",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/fun-run/22bbf80501-1772825490/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/fun-run/22bbf80501-1772825490/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a district: Gain Action.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Back-alley Deal",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/back-alley-deal/6b27be785f-1750983252/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Subterfuge"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/back-alley-deal/6b27be785f-1750983252/card.webp",
+        "abilityText": "(Action) Gain 1 Heat: Gain 4 Shard and draw 1 card.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Fade into the Crowd",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/fade-into-the-crowd/b57598b382-1772825490/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/fade-into-the-crowd/b57598b382-1772825490/card.webp",
+        "abilityText": "(Instant): Swap 2 cards in your grid.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Finders Keepers",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/finders-keepers/699c95675e-1772825490/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Subterfuge"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/finders-keepers/699c95675e-1772825490/card.webp",
+        "abilityText": "(Action) Gain 1 Heat: Gain 4 Shard and draw a card.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Bump \u2019n\u2019 Lift",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/bump-n-lift/6fe5fdc80b-1755296966/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Commerce",
+            "Subterfuge"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/bump-n-lift/6fe5fdc80b-1755296966/card.webp",
+        "abilityText": "(Reaction) After a player completes an encounter with a card in your grid, if you have fewer Shard in your pool than they have: Steal 1 Shard from their pool.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Knot Today",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/knot-today/1d1aa8f178-1746720029/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge",
+            "Tactic"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/knot-today/1d1aa8f178-1746720029/card.webp",
+        "abilityText": "(Reaction) As you discover a moment in a Council or Commons: Archive that moment. Draw 1 card.",
+        "shardCost": "0",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Smash & Grab",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/smash-grab/a1b2576bd3-1755296966/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Tactic"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/smash-grab/a1b2576bd3-1755296966/card.webp",
+        "abilityText": "(Reaction) After you complete a breach on a player\u2019s Council, gain 1 Heat: Steal 2 Shard from their pool.",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     },
     {
         "name": "Smooth Handoff",
-        "frontImageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/smooth-handoff/0c529ba870-1745706624/card.webp",
-        "type": "Moment"
+        "type": "Moment",
+        "traits": [
+            "Subterfuge",
+            "Tactic"
+        ],
+        "faction": "Remnants",
+        "imageUrl": "https://decksmith.app/media/pages/hubworldaidalon/cards/prime-collective/smooth-handoff/0c529ba870-1745706624/card.webp",
+        "abilityText": "(Instant) Add a card in your grid to your Council: Stage 1 card (you can stage agents, obstacles, and sources).",
+        "shardCost": "1",
+        "barrier": null,
+        "scrapCost": null
     }
 ]

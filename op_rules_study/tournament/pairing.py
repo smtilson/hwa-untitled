@@ -16,7 +16,7 @@ classic Swiss "within-bracket" strategies plus randomised baselines:
 
 * ``adjacent``   -- sort by rank, pair neighbours (1v2, 3v4, ...).
 * ``fold``       -- top half vs. bottom half (1vN/2, 2v..., a.k.a. "fold").
-* ``slide``      -- top of a bracket plays the next seed down ("slaughter").
+* ``strong_weak`` -- pair strongest with weakest, then second strongest with second weakest, etc.
 * ``random``     -- shuffle the whole field, ignore records (control group).
 * ``random_within_record`` -- shuffle inside each record group, then pair.
 
@@ -28,12 +28,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from random import Random
-from typing import Callable, Optional
+from typing import Callable
 
-from .models import BYE
-from .standings import Record, group_by_record, rank_key
+from .standings import (
+    Record,
+    create_ranked_even_groups,
+    group_by_record,
+    make_rank_key,
+    sort_groups,
+)
 
-# A pairing is just an ordered pair of player ids (second may be BYE).
 Pairing = tuple[int, int]
 
 
@@ -57,21 +61,24 @@ PairingFunction = Callable[[dict[int, Record], Random, PairingContext], list[Pai
 # Helpers
 # --------------------------------------------------------------------------- #
 def _pair_sequence(order: list[int]) -> list[Pairing]:
-    """Pair an ordered list of ids 1-2, 3-4, ...; trailing odd id gets a bye."""
+    """Pair an ordered list of ids 1-2, 3-4, ..."""
+    if len(order) % 2:
+        raise ValueError(f"odd number of players: {order!r}")
     pairs: list[Pairing] = []
     it = iter(order)
     for a in it:
-        # Sean remove byes
-        b = next(it, BYE)
+        b = next(it, None)
         pairs.append((a, b))
     return pairs
 
 
+# devin: what is the point of this function?
 def _ordered_ids(records: dict[int, Record]) -> list[int]:
     """All player ids sorted best-record-first by the default rank key."""
-    return [r.pid for r in sorted(records.values(), key=rank_key, reverse=True)]
+    return [r.pid for r in sorted(records.values(), key=make_rank_key(), reverse=True)]
 
 
+# devin: what is the point of this function?
 def _avoid_rematches(order: list[int], ctx: PairingContext) -> list[int]:
     """Greedy fix-up: if a pair are past opponents, swap the second player with
     the next available id. Best-effort only -- not guaranteed for pathological
@@ -92,11 +99,14 @@ def _avoid_rematches(order: list[int], ctx: PairingContext) -> list[int]:
 # --------------------------------------------------------------------------- #
 # Within-group orderings (the part the study compares)
 # --------------------------------------------------------------------------- #
+
+
 def _adjacent(group: list[int], rng: Random) -> list[int]:
     return list(group)
 
 
 def _fold(group: list[int], rng: Random) -> list[int]:
+
     half = len(group) // 2
     top, bottom = group[:half], group[half:]
     out: list[int] = []
@@ -108,9 +118,17 @@ def _fold(group: list[int], rng: Random) -> list[int]:
     return out
 
 
-def _slide(group: list[int], rng: Random) -> list[int]:
-    # Same neighbour pairing as adjacent but kept distinct for clarity/extension.
-    return list(group)
+def _strong_weak(group: list[int], rng: Random) -> list[int]:
+    # Pair strongest with weakest, then second strongest with second weakest, etc.
+    # This is a different approach to pairing players within a group.
+    group = list(group)
+    out: list[int] = []
+    for i in range(len(group) // 2):
+        out.append(group[i])
+        out.append(group[-(i + 1)])
+    if len(group) % 2:
+        out.append(group[len(group) // 2])
+    return out
 
 
 def _shuffle(group: list[int], rng: Random) -> list[int]:
@@ -122,14 +140,19 @@ def _shuffle(group: list[int], rng: Random) -> list[int]:
 _WITHIN_GROUP = {
     "adjacent": _adjacent,
     "fold": _fold,
-    "slide": _slide,
     "random_within_record": _shuffle,
+    "strong_weak": _strong_weak,
 }
 
 
-def make_record_group_pairing(strategy: str = "adjacent") -> PairingFunction:
+def make_record_group_pairing(
+    strategy: str = "adjacent", rating_fn: Callable | None = None
+) -> PairingFunction:
     """Build a pairing function that groups by record, orders within each group
     using ``strategy``, then pairs adjacent players across the flattened order.
+
+    ``rating_fn`` is forwarded to :func:`standings.sort_groups` to score the
+    agent sequence when ranking tied records (``None`` uses the default).
     """
     if strategy not in _WITHIN_GROUP:
         raise ValueError(
@@ -140,9 +163,10 @@ def make_record_group_pairing(strategy: str = "adjacent") -> PairingFunction:
     def _fn(
         records: dict[int, Record], rng: Random, ctx: PairingContext
     ) -> list[Pairing]:
-        groups = group_by_record(records)
+        groups = create_ranked_even_groups(records, rating_fn)
         order: list[int] = []
-        for _label, pids in groups.items():
+        for _label, recs in groups.items():
+            pids = [r.pid for r in recs]
             order.extend(within(pids, rng))
         order = _avoid_rematches(order, ctx)
         return _pair_sequence(order)
@@ -165,7 +189,7 @@ def random_pairing(
 REGISTRY: dict[str, PairingFunction] = {
     "adjacent": make_record_group_pairing("adjacent"),
     "fold": make_record_group_pairing("fold"),
-    "slide": make_record_group_pairing("slide"),
+    "strong_weak": make_record_group_pairing("strong_weak"),
     "random_within_record": make_record_group_pairing("random_within_record"),
     "random": random_pairing,
 }

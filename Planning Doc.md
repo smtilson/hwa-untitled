@@ -131,14 +131,16 @@ There are two parallel implementations:
 
 ### 6. **OP rules study** (`op_rules_study/`)
 
-**Status**: Planned  
-**Purpose**: Study different OP rule set options.  
+**Status**: In Progress  
+**Purpose**: Study organized-play tournament rule options, especially pairing algorithms.  
 **Features**:
 
-- Comprehensive rule documentation
-- Analysis of rule interactions
-- Examples and edge cases
-- Comparison between different rule sets
+- Tournament model for players, games, matches, rounds, and full events
+- Pairing algorithm families (`adjacent`, `fold`, `strong_weak`, `random_within_record`, `random`)
+- Skill-aware and skill-blind result generators
+- CSV output for players, matches, and standings
+- Unit and smoke test suite for the current simulation pipeline
+- Documentation for modeling decisions and open study questions
 
 ## Module Architecture & Dependencies
 

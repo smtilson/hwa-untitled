@@ -19,29 +19,35 @@ from tournament import (  # noqa: E402
     run_tournament,
     summary,
 )
-from tournament.generators import simulate_game, skilled_match  # noqa: E402
+from tournament.generators import skill_game, skilled_match  # noqa: E402
 from tournament.standings import compute_records  # noqa: E402
 
 
 def test_game_always_has_a_winner_with_three_agents():
     rng = Random(1)
     for _ in range(200):
-        g = simulate_game(0.3, -0.2, rng)
+        g = skill_game(60, 40, rng)
         assert max(g.agents_a, g.agents_b) == AGENTS_TO_WIN
         assert g.agents_a != g.agents_b
 
 
-def test_match_never_ties():
+def test_match_is_two_games_with_consistent_outcome():
     rng = Random(2)
     players = make_players(2, rng)
+    pids = {players[0].pid, players[1].pid}
     for _ in range(200):
         m = skilled_match(players[0], players[1], rng)
-        # Sean Update: update to `m.total_agents_a != m.total_agents_b` and derive
-        # the winner from `m.results` -- `agents_a`/`agents_b`/`winner` are gone.
-        # Every test in this file that calls run_tournament/compute_records will
-        # also fail until standings.py + generators.py are fixed.
-        assert m.agents_a != m.agents_b
-        assert m.winner in (players[0].pid, players[1].pid)
+        valid, msg = m.is_valid
+        assert valid, msg
+        assert len(m.games) == 2
+        # A match either has a clear winner (2-0) or is a 1-1 draw.
+        if m.is_draw:
+            assert m.game_1_winner != m.game_2_winner
+        else:
+            assert m.game_1_winner == m.game_2_winner
+            assert m.game_1_winner in pids
+        # The bonus-agent tie-break ensures the agent score is never tied.
+        assert m.total_agents_a != m.total_agents_b
 
 
 def test_each_player_plays_once_per_round():
@@ -52,7 +58,9 @@ def test_each_player_plays_once_per_round():
         seen: set[int] = set()
         for m in rnd.matches:
             assert m.player_a not in seen
+            assert m.player_b not in seen
             seen.add(m.player_a)
+            seen.add(m.player_b)
         assert len([p for p in players if p.pid in seen]) == len(players)
 
 

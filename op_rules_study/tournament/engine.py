@@ -13,7 +13,7 @@ from random import Random
 from typing import Callable, Mapping, Sequence, Union
 
 from .generators import skilled_match
-from .models import BYE, Match, Player, Round, Tournament
+from .models import Match, Player, Round, Tournament
 from .pairing import PairingContext, PairingFunction
 from .standings import compute_records
 
@@ -65,11 +65,7 @@ def run_tournament(
 
         rnd = Round(number=n)
         for a, b in pairs:
-            # Sean remove byes
-            if b == BYE:
-                rnd.matches.append(Match(player_a=a, player_b=BYE))
-            else:
-                rnd.matches.append(match_model(by_id[a], by_id[b], rng))
+            rnd.matches.append(match_model(by_id[a], by_id[b], rng))
         tournament.rounds.append(rnd)
 
     return tournament

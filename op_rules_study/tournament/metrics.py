@@ -12,22 +12,34 @@ from __future__ import annotations
 from statistics import fmean, pstdev
 
 from .models import Tournament
-from .standings import compute_records, rank_key
+from .standings import compute_records, make_rank_key
 
 
-def mean_skill_gap(tournament: Tournament) -> float:
-    """Average absolute skill difference between paired players (lower = better
-    matched). Byes are ignored.
-    """
+def gap_list(tournament: Tournament) -> list[float]:
+    """List of absolute skill differences between paired players."""
     gaps: list[float] = []
     by_id = {p.pid: p for p in tournament.players}
     for rnd in tournament.rounds:
         for m in rnd.matches:
-            # Sean remove byes
-            if m.is_bye:
-                continue
             gaps.append(abs(by_id[m.player_a].skill - by_id[m.player_b].skill))
+    return gaps
+
+
+def mean_skill_gap(tournament: Tournament) -> float:
+    """Average absolute skill difference between paired players (lower = better
+    matched).
+    """
+    gaps = gap_list(tournament)
     return fmean(gaps) if gaps else 0.0
+
+    
+
+def weighted_skill_gap_score(tournament: Tournament) -> float:
+    """Weighted average of skill gaps, weighted by the number of matches played."""
+    gaps = gap_list(tournament)
+    weighted_gaps = [gap * i / len(gaps) for i, gap in enumerate(gaps)]
+    return fmean(weighted_gaps) if gaps else 0.0
+
 
 
 def standings_skill_correlation(tournament: Tournament) -> float:
@@ -39,7 +51,9 @@ def standings_skill_correlation(tournament: Tournament) -> float:
     records = compute_records(tournament)
     by_id = {p.pid: p for p in tournament.players}
 
-    final_order = [r.pid for r in sorted(records.values(), key=rank_key, reverse=True)]
+    final_order = [
+        r.pid for r in sorted(records.values(), key=make_rank_key(), reverse=True)
+    ]
     skill_order = sorted(by_id, key=lambda pid: by_id[pid].skill, reverse=True)
 
     standings_rank = {pid: i for i, pid in enumerate(final_order)}
@@ -62,8 +76,6 @@ def rematch_count(tournament: Tournament) -> int:
     seen: dict[frozenset[int], int] = {}
     for rnd in tournament.rounds:
         for m in rnd.matches:
-            if m.is_bye:
-                continue
             key = frozenset((m.player_a, m.player_b))
             seen[key] = seen.get(key, 0) + 1
     return sum(c - 1 for c in seen.values() if c > 1)
@@ -73,6 +85,7 @@ def summary(tournament: Tournament) -> dict[str, float]:
     """Bundle the headline metrics for one tournament."""
     return {
         "mean_skill_gap": mean_skill_gap(tournament),
+        "weighted_skill_gap_score": weighted_skill_gap_score(tournament),
         "standings_skill_correlation": standings_skill_correlation(tournament),
         "rematch_count": float(rematch_count(tournament)),
         "rounds": float(len(tournament.rounds)),

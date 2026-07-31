@@ -27,55 +27,36 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Optional, Callable
 
-# Sean Update: This `..scripts.utils` relative import will raise ImportError at
-# runtime. `_bootstrap.py` adds the module root to sys.path and imports
-# `tournament` as a TOP-LEVEL package, so it has no parent package for `..` to
-# resolve against. Fix: move `check_validity` into the package (e.g. create
-# `tournament/utils.py`) and use `from .utils import check_validity`, or install
-# `op_rules_study` as a proper package.
-# Windsurf: Check that the above comment is addressed. If it is document the fix in the planning doc and delete this comment and your update comment.
 from .utils import check_validity
 
 # Number of agents a player must capture to win a single game.
 AGENTS_TO_WIN: int = 3
 
-# Windsurf: For the time being, let us just force the number of players to be even.
-# TODO(Sean): Byes and the `BYE` sentinel were removed from the model. Follow up to
-# check the downstream effects of this change -- `pairing._pair_sequence`,
-# `engine.run_tournament`, `standings.compute_records`, `io.write_matches` /
-# `read_matches`, and `tournament/__init__` still import/reference `BYE`, and the
-# tests assume bye handling. These break until updated to require an even field.
+# Byes are not modeled: tournaments require an even number of players (enforced
+# in `engine.run_tournament`). See PLANNING.md D5.
 
 
-# Windsurf: I want a version of this class where skill can be an ignored trait.
-# Cascade reply: `skill` already defaults to 0.0, and the pairing algorithms
-# never read it (only the generators do) -- so it is effectively "ignored"
-# wherever you don't simulate from it. If you want a hard guarantee, the cleanest
-# options (no code here as requested) are: (1) make `skill: Optional[float] = None`
-# and have generators reject/skip when it's None, or (2) keep one `Player` and add
-# a generator/tournament-level switch "use_skill" rather than a second class --
-# subclassing a frozen, slotted dataclass is awkward and would duplicate logic.
-# A separate class is usually overkill versus an optional field + a flag.
-# Windsurf: I definitely didn't mean to use a separate class. I meant add flags in the relevant functions.
+# Skill is "ignorable" via the result model, not a per-Player flag: `random_match`
+# ignores skill, `skilled_match` uses it (selectable in engine via `match_model`).
 @dataclass(slots=True, frozen=True)
 class Player:
     """A competitor.
 
-    ``skill`` is a latent "true strength" parameter. It is only ever consumed
-    by the result *generators* (see ``generators.py``); the pairing algorithms
-    must never look at it -- they only see results/records.
+    ``skill`` is a latent "true strength" parameter (integer 1–100). It is only
+    ever consumed by the result *generators* (see ``generators.py``); the
+    pairing algorithms must never look at it -- they only see results/records.
     """
 
     pid: int
     name: str
-    # TODO: Windsurf: Add flag to ignore skill
-    # Cascade reply: A per-`Player` boolean here would be redundant -- whether
-    # skill matters is a property of the *result model*, not of an individual
-    # competitor. Prefer a single switch passed to the generator (e.g.
-    # `random_match` already ignores skill; `skilled_match` uses it). If you do
-    # want it on the data, `Optional[float] = None` (see reply above) signals
-    # "unknown/ignored" more naturally than a paired bool + float.
-    skill: float = 0.0
+    skill: int = 50
+
+    def to_dict(self) -> dict:
+        return {"pid": self.pid, "name": self.name, "skill": self.skill}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Player":
+        return cls(pid=d["pid"], name=d["name"], skill=d["skill"])
 
 
 @dataclass(slots=True, frozen=True)
@@ -105,6 +86,13 @@ class Game:
     def winner_is_a(self) -> bool:
         return self.agents_a == AGENTS_TO_WIN
 
+    def to_dict(self) -> dict:
+        return {"agents_a": self.agents_a, "agents_b": self.agents_b}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Game":
+        return cls(agents_a=d["agents_a"], agents_b=d["agents_b"])
+
 
 @dataclass(slots=True)
 class Match:
@@ -113,30 +101,35 @@ class Match:
     player_a: int
     player_b: int
     games: list[Game] = field(default_factory=list)
+    # Tie-break award, decided by the result generator and fixed at construction
+    # (a constructor arg, no post-hoc mutation). Breaks a tied agent score without
+    # changing the game-win-based winner. See generators / PLANNING.md D7.
+    bonus_agents_a: int = field(default=0, repr=False)
+    bonus_agents_b: int = field(default=0, repr=False)
     _results: dict | None = field(default=None, init=False, repr=False)
 
     @property
     def is_valid(self) -> tuple[bool, str]:
         valid = True
         error_msg = ""
+        # Sean tie breaker attention: a match is exactly two games. The tie-break
+        # no longer appends a third game -- it awards bonus agents (set at
+        # construction by the result generator) instead.
         if len(self.games) != 2:
             valid = False
-            error_msg += "Match does not have 2 games.\n"
+            error_msg += "Match must have 2 games.\n"
         if self.player_a == self.player_b:
             valid = False
             error_msg += "Match players are the same.\n"
-        if self.total_agents_a == self.total_agents_b:
-            valid = False
-            error_msg += "Total agents are the same.\n"
         return valid, error_msg
 
     @property
     def total_agents_a(self) -> int:
-        return sum(g.agents_a for g in self.games)
+        return sum(g.agents_a for g in self.games) + self.bonus_agents_a
 
     @property
     def total_agents_b(self) -> int:
-        return sum(g.agents_b for g in self.games)
+        return sum(g.agents_b for g in self.games) + self.bonus_agents_b
 
     @property
     @check_validity
@@ -148,61 +141,69 @@ class Match:
     def game_2_winner(self) -> Optional[int]:
         return self.player_a if self.games[1].winner_is_a else self.player_b
 
-    # Sean Update: This flags a 1-1 game SPLIT as a draw, but a match is only a
-    # true draw when the AGENT TOTALS tie (and your rules then force sudden death
-    # so it shouldn't persist). Rename to `is_split`, or compute from
-    # `self.total_agents_a == self.total_agents_b`. (Decorator order now fixed.)
-    # Windsurf: This is false. The agent totals aren't actually determining the winner of the match, they will be used in other parts of the pairing algorithm. Please make sure to correct this in the readme, planning documents, and anywhere else as this is a key point.
+    def _game_win_counts(self) -> tuple[int, int]:
+        """(games won by A, games won by B) across all games in the match."""
+        wins_a = sum(1 for g in self.games if g.winner_is_a)
+        return wins_a, len(self.games) - wins_a
+
+    # A match is decided by its games (game wins), NOT by agent totals -- agent
+    # totals are surfaced for standings/tiebreakers downstream. A two-game match
+    # split 1-1 stays a draw; the bonus-agent tie-break (see generators) only
+    # breaks a tied agent score, it does not create a match winner. See
+    # PLANNING.md D7.
     @property
     @check_validity
     def is_draw(self):
-        return self.game_1_winner != self.game_2_winner
+        wins_a, wins_b = self._game_win_counts()
+        return wins_a == wins_b
+
+    @property
+    @check_validity
+    def winner(self) -> Optional[int]:
+        """Winning player id by game wins, or ``None`` for a draw."""
+        wins_a, wins_b = self._game_win_counts()
+        if wins_a == wins_b:
+            return None
+        return self.player_a if wins_a > wins_b else self.player_b
 
     @property
     @check_validity
     def agent_score(self):
         return (self.total_agents_a, self.total_agents_b)
 
-    # Sean Update: `@dataclass(slots=True)` forbids setting attributes that are
-    # not declared fields, so `self._results = ...` raises AttributeError at
-    # runtime. Options: declare `_results: dict | None = field(default=None,
-    # init=False, repr=False)`, drop `slots=True` for Match, or use
-    # `functools.cached_property`. (Same problem hits `Round._overall_results`.)
     def _compute_results(self) -> dict:
-        # Cascade: added "opponent_agents" to each player's entry so the per-player
-        # result dict is self-contained (agents-for AND agents-against). This lets
-        # standings.Record consume Round.player_results directly.
+        # Each player's entry carries both agents-for ("player_agents") and
+        # agents-against ("opponent_agents") so standings.Record can consume
+        # Round.player_results directly.
         self._results = {
             self.player_a: {
                 "id": self.player_a,
                 "wins": 0,
                 "losses": 0,
-                "player_agents": 0,
-                "opponent_agents": 0,
+                "player_agents": self.total_agents_a,
+                "opponent_agents": self.total_agents_b,
+                "bonus_agents": self.bonus_agents_a,
                 "opponent": self.player_b,
             },
             self.player_b: {
                 "id": self.player_b,
                 "wins": 0,
                 "losses": 0,
-                "player_agents": 0,
-                "opponent_agents": 0,
+                "player_agents": self.total_agents_b,
+                "opponent_agents": self.total_agents_a,
+                "bonus_agents": self.bonus_agents_b,
                 "opponent": self.player_a,
             },
             "is_draw": self.is_draw,
         }
         for game in self.games:
-            self._results[self.player_a]["player_agents"] += game.agents_a
-            self._results[self.player_b]["player_agents"] += game.agents_b
-            # Cascade: each player's agents-against is the opponent's agents.
-            self._results[self.player_a]["opponent_agents"] += game.agents_b
-            self._results[self.player_b]["opponent_agents"] += game.agents_a
             if game.winner_is_a:
                 self._results[self.player_a]["wins"] += 1
                 self._results[self.player_b]["losses"] += 1
             else:
                 self._results[self.player_b]["wins"] += 1
                 self._results[self.player_a]["losses"] += 1
+
         return self._results
 
     @property
@@ -211,6 +212,25 @@ class Match:
         if self._results is None:
             self._compute_results()
         return self._results
+
+    def to_dict(self) -> dict:
+        return {
+            "player_a": self.player_a,
+            "player_b": self.player_b,
+            "games": [g.to_dict() for g in self.games],
+            "bonus_agents_a": self.bonus_agents_a,
+            "bonus_agents_b": self.bonus_agents_b,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Match":
+        return cls(
+            player_a=d["player_a"],
+            player_b=d["player_b"],
+            games=[Game.from_dict(g) for g in d["games"]],
+            bonus_agents_a=d.get("bonus_agents_a", 0),
+            bonus_agents_b=d.get("bonus_agents_b", 0),
+        )
 
 
 @dataclass(slots=True)
@@ -222,7 +242,7 @@ class Round:
     _overall_results: dict | None = field(default=None, init=False, repr=False)
 
     @property
-    def is_valid(self) -> bool:
+    def is_valid(self) -> tuple[bool, str]:
         valid = True
         error_msg = ""
         for match in self.matches:
@@ -234,28 +254,29 @@ class Round:
 
         return valid, error_msg
 
+    @property
+    def players(self):
+        """Return a set of all player IDs in this round."""
+        return {match.player_a for match in self.matches} | {
+            match.player_b for match in self.matches
+        }
+
     @check_validity
     def opponents(self) -> dict[int, int]:
         """Map every player id to the id they faced this round."""
         table: dict[int, int] = {}
         for m in self.matches:
             table[m.player_a] = m.player_b
+            table[m.player_b] = m.player_a
         return table
 
     def player_results(self, player_id: int) -> dict:
         """
         Returns a dictionary with the results of the player's matches in this round.
         """
-        for match in self.matches:
-            if match.player_a == player_id or match.player_b == player_id:
-                break
-        else:
-            raise ValueError(f"Player {player_id} not found in round {self.number}")
+        return self.overall_results["matches"][player_id]
 
-        results = match.results[player_id]
-        return results
-
-    def _compute_overall_results(self) -> dict:
+    def _compute_overall_results(self) -> None:
         self._overall_results = {"round": self.number, "matches": {}}
         for match in self.matches:
             self._overall_results["matches"][match.player_a] = match.results[
@@ -264,7 +285,6 @@ class Round:
             self._overall_results["matches"][match.player_b] = match.results[
                 match.player_b
             ]
-        return self._overall_results
 
     @property
     @check_validity
@@ -273,8 +293,21 @@ class Round:
         Returns a dictionary with the overall results of the round.
         """
         if self._overall_results is None:
-            self._overall_results = self._compute_overall_results()
+            self._compute_overall_results()
         return self._overall_results
+
+    def to_dict(self) -> dict:
+        return {
+            "number": self.number,
+            "matches": [m.to_dict() for m in self.matches],
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Round":
+        return cls(
+            number=d["number"],
+            matches=[Match.from_dict(m) for m in d["matches"]],
+        )
 
 
 @dataclass(slots=True)
@@ -306,3 +339,16 @@ class Tournament:
             if opp is not None:
                 seen.add(opp)
         return seen
+
+    def to_dict(self) -> dict:
+        return {
+            "players": [p.to_dict() for p in self.players],
+            "rounds": [r.to_dict() for r in self.rounds],
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "Tournament":
+        return cls(
+            players=[Player.from_dict(p) for p in d["players"]],
+            rounds=[Round.from_dict(r) for r in d["rounds"]],
+        )

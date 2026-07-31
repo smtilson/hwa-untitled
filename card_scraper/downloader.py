@@ -1,5 +1,6 @@
-from log_utils import log_call
-from utils import convert_name
+from card_scraper.logging_utils import log_call
+from card_scraper.utils import convert_name
+import requests
 import logging
 import os
 

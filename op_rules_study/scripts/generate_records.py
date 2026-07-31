@@ -25,16 +25,29 @@ from tournament.io import write_matches, write_players, write_standings
 
 
 def parse_args() -> argparse.Namespace:
-    p = argparse.ArgumentParser(description="Generate Hubworld: Aidalon tournament records.")
+    p = argparse.ArgumentParser(
+        description="Generate Hubworld: Aidalon tournament records."
+    )
     p.add_argument("--players", type=int, default=32, help="number of players")
     p.add_argument("--rounds", type=int, default=5, help="number of rounds")
-    p.add_argument("--pairing", default="adjacent",
-                   help="pairing algorithm: adjacent, fold, slide, random_within_record, random")
-    p.add_argument("--model", default="skilled", choices=list(MATCH_MODELS),
-                   help="result model used to play matches")
-    p.add_argument("--skill-sd", type=float, default=1.0, help="std-dev of latent skill")
+    p.add_argument(
+        "--pairing",
+        default="adjacent",
+        help="pairing algorithm: adjacent, fold, strong_weak, random_within_record, random",
+    )
+    p.add_argument(
+        "--model",
+        default="skilled",
+        choices=list(MATCH_MODELS),
+        help="result model used to play matches",
+    )
+    p.add_argument(
+        "--skill-sd", type=float, default=1.0, help="std-dev of latent skill"
+    )
     p.add_argument("--seed", type=int, default=0, help="RNG seed for reproducibility")
-    p.add_argument("--tag", default=None, help="filename prefix (defaults to the pairing name)")
+    p.add_argument(
+        "--tag", default=None, help="filename prefix (defaults to the pairing name)"
+    )
     return p.parse_args()
 
 
@@ -56,7 +69,9 @@ def main() -> None:
     write_matches(tournament, DATA_DIR / f"{tag}_matches.csv")
     write_standings(tournament, DATA_DIR / f"{tag}_standings.csv")
 
-    print(f"Wrote {tag}_players.csv, {tag}_matches.csv, {tag}_standings.csv to {DATA_DIR}")
+    print(
+        f"Wrote {tag}_players.csv, {tag}_matches.csv, {tag}_standings.csv to {DATA_DIR}"
+    )
     for k, v in summary(tournament).items():
         print(f"  {k:>30}: {v:.4f}")
 

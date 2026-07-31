@@ -12,12 +12,14 @@ open on purpose** — fill them in as the study progresses.
 simulated round-by-round from latent skill?
 
 ### Option A — Pure random results (`generators.random_match`)
+
 - **Pros:** Trivial; no assumptions; good null model to check that "good"
   pairing metrics aren't an artifact of the metric itself.
 - **Cons:** No ground-truth strength exists, so "pairing people of comparable
   strength" is undefined — can only measure structural properties (rematches).
 
 ### Option B — Skill-based simulation (`generators.skilled_match`)
+
 - **Pros:** Each player has a latent `skill`; agents are Bernoulli trials with a
   logistic (Bradley-Terry) probability. Gives a **ground truth** so we can ask
   whether standings recover the true skill order.
@@ -25,6 +27,7 @@ simulated round-by-round from latent skill?
   real Hubworld outcomes are non-logistic (e.g. matchup/rock-paper-scissors).
 
 ### Option C — Empirical / fitted distribution
+
 - **Pros:** Most realistic if we have real event data to fit.
 - **Cons:** Requires data we don't yet have.
 
@@ -38,6 +41,7 @@ simulated round-by-round from latent skill?
 generate a round, pair, generate the next round, …?
 
 ### Option A — Whole-tournament, then apply pairings
+
 - **Pros:** Isolates a single pairing decision on identical data; low variance
   when comparing.
 - **Cons:** **Incoherent** — a player's round-3 result can't depend on a round-3
@@ -45,6 +49,7 @@ generate a round, pair, generate the next round, …?
   one-shot "given these standings, who plays whom?" questions.
 
 ### Option B — Round-by-round loop (`engine.run_tournament`)
+
 - **Pros:** Realistic; pairing genuinely affects who plays whom and therefore
   the standings. This is what makes the comparison meaningful.
 - **Cons:** Higher variance; needs many trials to compare algorithms.
@@ -146,22 +151,40 @@ tied**. The revised model takes a different stance:
   3+ games and therefore *fails* the new two-game `is_valid` check.
 
 ### Option A — Embrace draws (no sudden death)
+
 - **Pros:** Simpler match object (always two games); `is_draw` is meaningful;
   matches a common "best-of-two, draws allowed" OP format.
 - **Cons:** Standings must define a draw's value (D4); pairing/record groups grow
   a middle tier; diverges from the original written rule.
 
 ### Option B — Keep sudden death (no draws)
+
 - **Pros:** Matches the original spec; standings stay win/loss only.
 - **Cons:** A match can have a variable number of games → relax `is_valid`
   (e.g. `len(games) >= 2`); `is_draw` should be computed from tied agent totals
   *before* sudden death, or removed.
 
 ### Option C — Distinguish *game split* from *match draw*
+
 - Track a 1-1 **game split** separately from a true **agent tie**; a split that
   is not an agent tie still has a match winner (more agents), and only an agent
   tie triggers sudden death.
 
-**Status:** Open. Until resolved, `is_draw` semantics, the generators, and
-`Match.is_valid` disagree with each other. Whatever is chosen must be applied
-consistently across `models.py`, `generators.py`, `standings.py`, and `io.py`.
+**Status: RESOLVED — Option A (draws allowed) with a bonus-agent tie-break for
+tied agent scores.** A `Match` is always exactly two games with outcomes 2-0 /
+0-2 / 1-1 (`is_draw`). Agent totals do **not** decide the match (game wins do);
+they are surfaced for standings/tiebreakers only. The tie-break does **not** add
+a game or change the winner — it awards a **bonus agent** to break a tied *agent
+score* so standings can separate otherwise-tied players. Applied consistently:
+
+- `models.py`: `Match.is_valid` requires exactly two games. `is_draw` / `winner`
+  are computed from **game-win counts**, not agent totals (a 1-1 draw can tie on
+  agents, e.g. 4-4). `Match` takes `bonus_agents_a/b` as **constructor args**
+  (decided by the generator, fixed at creation — no post-hoc mutation), folded
+  into `total_agents_*` and `results["player_agents"]`.
+- `generators.py`: `skilled_match` / `random_match` always produce exactly two
+  games (draws allowed); `_tie_break_bonus` computes the bonus to break a tied
+  agent score (passed into the `Match`) — `skilled_match` weights it by
+  `score_agent_probability`, `random_match` uses a fair coin.
+- `standings.py` / `io.py`: consume the `results` shape; the matches CSV stores
+  `bonus_agents_a/b` (restored on read) so totals round-trip.

@@ -10,11 +10,12 @@ Legend:
 - ✅ — a previously-flagged issue is now resolved.
 - ⚠️ — still needs attention; a change here breaks something elsewhere.
 
-_Updated to reflect the current state of the files: the model redesign (draws,
-the `results` dict, the validity layer), the **bye removal**, and the
-`standings.py` re-sync. Entries are split into **Finished** (no further action
-needed on that file) and **Unfinished** (still breaks something / needs work).
-Both sections use the same internal organization._
+_Current status note (June 2026): this historical inventory is now partially stale._
+The package has since been updated to remove downstream `BYE` references, use the
+current `Match` API, add bonus-agent tie-break fields, restore package imports,
+and pass the full unit/smoke suite (`234 passed`). Treat `TODO.md`, `PLANNING.md`,
+and `docs/testing.md` as the current task/status sources; this file remains useful
+as a historical correction log until it is fully rewritten.
 
 ---
 
@@ -67,7 +68,8 @@ Files whose flagged corrections are fully resolved and need no further edits.
 
 # Unfinished ⚠️
 
-Files that still break something or have open items, organised the same way.
+Historical entries below may describe issues that have since been fixed. Verify
+against current source, `TODO.md`, and `PLANNING.md` before acting on an item.
 
 ## `tournament/` package
 
@@ -218,17 +220,14 @@ Tests: `test_game_always_has_a_winner_with_three_agents`, `test_match_never_ties
    `player_agents`/`opponent_agents` and the new `rank_key`.
 
 **Still open ⚠️**
-1. **`BYE` removal fallout.** `__init__`, `standings`, `pairing`, `engine`, `io`
-   still `import BYE`; `metrics` calls `m.is_bye`; tests assume byes. All break
-   until they require an even field / drop bye handling.
-2. **`generators.py` rename fallout.** `win_probability` →
-   `score_agent_probability` not propagated to `simulate_game` / `skilled_match`
-   or to `__init__.py` → `NameError` / `ImportError`.
-3. **Old `Match` API.** `generators` sudden-death (`agents_a/b`), `io`, tests, and
-   the notebook still use `agents_a`/`agents_b`/`winner`.
-4. **`io` ↔ `Record` schema drift.** `write_standings` reads `match_wins` /
-   `match_losses` / `match_points`; the current `Record` exposes `wins` /
-   `losses` / `agent_ratio` / `agent_diff`. CSV schemas need a rewrite.
+1. **Notebook refresh.** `notebooks/pairing_study.ipynb` and related notebooks
+   still need review/update against the current API.
+2. **Integration tests.** The 8 cross-module tests listed in `docs/testing.md`
+   are still outstanding.
+3. **Metrics choice.** `metrics.py` has working headline metrics, but the final
+   evaluation metric set is still a study-design decision.
+4. **Full rewrite of this inventory.** Many detailed per-file entries above are
+   historical and need to be rewritten or moved to Finished.
 
 **Pending requests embedded as `# Windsurf:` comments (not yet actioned):**
 - `tournament/utils.py` & `models.py`: document the import/decorator fix in the

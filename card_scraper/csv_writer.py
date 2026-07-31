@@ -4,6 +4,13 @@ import csv
 FIELDNAMES = [
     "databaseID",
     "name",
+    "type",
+    "traits",
+    "faction",
+    "abilityText",
+    "shardCost",
+    "barrier",
+    "scrapCost",
     "quantity",
     "landscape",
     "set",
@@ -31,53 +38,49 @@ PLACEHOLDER_CARD_BACK = (
 )
 
 
-# CHANGES (still apply):
-#  2. SEEKERS is referenced but not defined — will raise NameError. Either
-#     import it from a constants module, accept it as a parameter, or load
-#     from a config file (preferred).
-#  5. Use `enumerate(cards, start=1)` and f"{i:02d}" for id_number instead
-#     of the string-length check.
-#  6. The gameImageUrl/presence/actionLimit assignments to None are
-#     unnecessary — DictWriter fills missing keys with empty strings.
-#  7. Consider accepting `cards` as the rich dicts from get_card_data and
-#     mapping the scraper fields -> CSV columns explicitly (don't mutate the
-#     input dicts in place).
+# Default set classification for cards produced by get_card_data.
+DEFAULT_SET = "Default Set"
+DEFAULT_SET_TYPE = "Set Type Default"
+
+
 def prepare_dragn_cards_rows(cards_data, card_back_url=PLACEHOLDER_CARD_BACK):
     """Build the list of row-dicts that will be written to the CSV.
 
-    Performs all per-card enrichment / validation:
-      - skips falsy cards
-      - assigns databaseID, quantity, landscape, cardBack
-      - assigns set / setType based on SEEKERS membership
+    Maps the rich dicts returned by get_card_data to the DragnCards CSV
+    column schema, adding required metadata fields without mutating the
+    input cards.
 
     Returns a list of dicts including the leading game header row.
     """
     rows = [GAME_HEADER_ROW]
 
-    for index, card in enumerate(cards_data):
+    for index, card in enumerate(cards_data, start=1):
         if card is None:
             continue
 
-        # databaseID = base + 2-digit index
-        index = str(index + 1)
-        id_number = index if len(index) == 2 else "0" + index
-        card["databaseID"] = BASE_ID + id_number
-        card["quantity"] = 2
-        card["landscape"] = "no"
-        card["cardBack"] = card_back_url
-        card["gameImageUrl"] = None
-        card["presence"] = None
-        card["actionLimit"] = None
+        id_number = f"{index:02d}"
+        traits = card.get("traits")
+        if isinstance(traits, list):
+            traits = ", ".join(traits)
 
-        # TODO: SEEKERS is a hardcoded list - should be defined or loaded from config
-        if card["name"] in SEEKERS:
-            card["set"] = "Demo Seekers"
-            card["setType"] = "Seekers"
-        else:
-            card["set"] = "Preview Deck"
-            card["setType"] = "Premade Decks"
-
-        rows.append(card)
+        row = {
+            "databaseID": BASE_ID + id_number,
+            "name": card.get("name"),
+            "type": card.get("type"),
+            "traits": traits,
+            "faction": card.get("faction"),
+            "abilityText": card.get("abilityText"),
+            "shardCost": card.get("shardCost"),
+            "barrier": card.get("barrier"),
+            "scrapCost": card.get("scrapCost"),
+            "quantity": 2,
+            "landscape": "no",
+            "set": DEFAULT_SET,
+            "setType": DEFAULT_SET_TYPE,
+            "imageUrl": card.get("imageUrl"),
+            "cardBack": card_back_url,
+        }
+        rows.append(row)
 
     return rows
 
